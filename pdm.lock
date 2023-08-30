@@ -6,7 +6,7 @@ groups = ["default"]
 cross_platform = true
 static_urls = false
 lock_version = "4.3"
-content_hash = "sha256:f46c7c038360c92011f31ef4dd6cdc179ca9ded57970011035ba96a63869ab6d"
+content_hash = "sha256:e3c565fb162eb068ee143243e5d62e6f34aa35636177fef63d307b1d2af4cb41"
 
 [[package]]
 name = "arrow"

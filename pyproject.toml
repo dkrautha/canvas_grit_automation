@@ -9,6 +9,7 @@ dependencies = [
     "xlsx2csv>=0.8.1",
     "canvasapi>=3.2.0",
     "python-dotenv>=1.0.0",
+    "requests>=2.31.0",
 ]
 requires-python = ">=3.11"
 readme = "README.md"
