@@ -26,10 +26,8 @@ def get_quiz_results(
     quiz_id: int,
     since_time: datetime,
 ) -> pl.LazyFrame:
-    grades = course.get_grade_change_events(
-        assignment_id=quiz_id,
-        start_time=since_time,
-    )
+    assignment = course.get_assignment(quiz_id)
+    submissions = assignment.get_submissions(start_time=since_time)
 
     first_names: list[str] = []
     last_names: list[str] = []
@@ -37,13 +35,15 @@ def get_quiz_results(
     scores: list[float] = []
     emails: list[str] = []
 
-    for grade in grades:
-        student = course.get_user(grade.links["student"])
+    for sub in submissions:
+        student = course.get_user(sub.user_id)
         last_name, first_name = cast(
             tuple[str, str], [n.strip() for n in student.sortable_name.split(",")]
         )
         cwid: str = student.sis_user_id
-        score: float = float(grade.grade_after.replace("%", ""))
+        if sub.grade is None:
+            continue
+        score = float(sub.grade.replace("%", ""))
         email: str = student.login_id
 
         first_names.append(first_name)
@@ -56,12 +56,19 @@ def get_quiz_results(
     return (
         pl.LazyFrame(
             {
-                "first_name": first_names,
-                "last_name": last_names,
-                "cwid": cwids,
+                "firstName": first_names,
+                "lastName": last_names,
+                "externalId": cwids,
                 "email": emails,
                 quiz_name: scores,
-            }
+            },
+            {
+                "firstName": str,
+                "lastName": str,
+                "externalId": str,
+                "email": str,
+                quiz_name: pl.Float32,
+            },
         )
         .filter(is_passing)
         .with_columns(is_passing)
@@ -79,14 +86,11 @@ def main():
     # temporary, in theory grab the current list from grit?
     database = pl.LazyFrame(
         {
-            "first_name": ["Not"],
-            "last_name": ["Real"],
-            "cwid": ["8675309"],
+            "firstName": ["Not"],
+            "lastName": ["Real"],
+            "externalId": ["8675309"],
             "email": ["notreal@stevens.edu"],
-            "drill_press": [True],
-            "3d_printers": [False],
-            "band_saw": [False],
-            "atc": [True],
+            **{quiz_name: [True] for quiz_name in QUIZ_IDS.keys()},
         }
     )
 
@@ -102,20 +106,17 @@ def main():
         )
 
         database = upsert(
-            database, results, ["cwid", "email", "first_name", "last_name"]
+            database, results, ["externalId", "email", "firstName", "lastName"]
         )
 
-    def bool_transform(x: bool) -> str | None:
-        return "x" if x else None
-
     updated_db = database.with_columns(
-        # this can be replaced with a regex once the correct column names
-        # are in (I think they all start with "pb:" or something like that)
-        pl.col(pl.Boolean).apply(bool_transform)
+        [
+            pl.when(pl.col(c)).then(pl.lit("x")).otherwise(pl.lit(None)).alias(c)
+            for c in QUIZ_IDS.keys()
+        ]
     ).collect()
 
-    print(updated_db)
-    # updated_db.write_csv("grit_export.csv")
+    updated_db.write_csv("grit_export.csv")
 
 
 if __name__ == "__main__":
