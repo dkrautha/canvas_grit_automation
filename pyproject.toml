@@ -5,8 +5,6 @@ description = ""
 authors = [{ name = "David Krauthamer", email = "dkrautha@pm.me" }]
 dependencies = [
     "polars>=0.18.15",
-    "XlsxWriter>=3.1.2",
-    "xlsx2csv>=0.8.1",
     "canvasapi>=3.2.0",
     "python-dotenv>=1.0.0",
     "requests>=2.31.0",
