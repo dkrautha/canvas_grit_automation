@@ -1,8 +1,10 @@
+import io
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import cast
 
 import polars as pl
+import requests
 from canvasapi import Canvas
 from canvasapi.course import Course
 from dotenv import load_dotenv
@@ -18,6 +20,8 @@ QUIZ_IDS = get_quiz_ids()
 API_URL = try_get_env("CANVAS_API_URL")
 API_KEY = try_get_env("CANVAS_API_KEY")
 DATABASE_PATH = Path(try_get_env("DATABASE_PATH"))
+GRIT_URL = try_get_env("GRIT_URL")
+GRIT_API_KEY = try_get_env("GRIT_API_KEY")
 
 
 def get_quiz_results(
@@ -117,9 +121,32 @@ def main():
         [
             pl.when(pl.col(c)).then(pl.lit("x")).otherwise(pl.lit(None)).alias(c)
             for c in QUIZ_IDS.keys()
+        ],
+        active=pl.lit("x"),
+    ).drop(
+        [
+            "enrollment_date",
+            "pg:Automated Tool Cabinet",  # TODO: temporary until grit has an ATC column
         ]
-    ).drop("enrollment_date")
-    give_to_grit.write_csv("give_to_grit.csv")
+    )
+
+    grit_csv = io.BytesIO()
+    give_to_grit.write_csv(grit_csv)
+    give_to_grit.write_csv("test.csv")
+
+    session = requests.Session()
+    req = session.prepare_request(
+        requests.Request(
+            method="POST",
+            url=f"{GRIT_URL}/api/batch/user/upsert",
+            headers={"x-auth-token": GRIT_API_KEY},
+            files={"file": grit_csv.getvalue()},
+        )
+    )
+
+    # resp = session.send(req)
+    # print(resp)
+    # print(resp.text)
 
 
 if __name__ == "__main__":
