@@ -40,14 +40,14 @@ def get_quiz_results(
     emails: list[str] = []
 
     for sub in submissions:
+        if sub.grade is None:
+            continue
+        score = float(sub.grade.replace("%", ""))
         student = course.get_user(sub.user_id)
         last_name, first_name = cast(
             tuple[str, str], [n.strip() for n in student.sortable_name.split(",")]
         )
         cwid: str = student.sis_user_id
-        if sub.grade is None:
-            continue
-        score = float(sub.grade.replace("%", ""))
         email: str = student.login_id
 
         first_names.append(first_name)
@@ -100,6 +100,7 @@ def main():
     course = canvas.get_course(COURSE_ID)
 
     for quiz_name, quiz_id in QUIZ_IDS.items():
+        # TODO: not currently in grit, so we skip for now
         if quiz_name == "pg:Automated Tool Cabinet":
             continue
         results = get_quiz_results(
@@ -117,11 +118,12 @@ def main():
         )
 
         results = results.collect()
-        if len(results) > 0:
+        # if no changes for a quiz, then skip sending to grit
+        if len(results) == 0:
             continue
-        results.write_csv(f"{quiz_name}.csv")
 
         grit_csv = io.BytesIO()
+        results.write_csv(grit_csv)
 
         response = upsert_grit(grit_csv)
         if not response.ok:
