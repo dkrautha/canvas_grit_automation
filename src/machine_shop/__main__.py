@@ -1,4 +1,5 @@
 import io
+import logging
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import cast
@@ -9,19 +10,18 @@ from canvasapi import Canvas
 from canvasapi.course import Course
 from dotenv import load_dotenv
 
-from .df_operations import upsert
-from .env import get_quiz_ids, try_get_env
+from .env import get_env_or_raise, get_quiz_ids
 
 load_dotenv()
+logging.basicConfig(filename=get_env_or_raise("LOG_FILE"), level=logging.DEBUG)
 
-
-COURSE_ID = try_get_env("CANVAS_COURSE_ID")
+COURSE_ID = get_env_or_raise("CANVAS_COURSE_ID")
 QUIZ_IDS = get_quiz_ids()
-API_URL = try_get_env("CANVAS_API_URL")
-API_KEY = try_get_env("CANVAS_API_KEY")
-DATABASE_PATH = Path(try_get_env("DATABASE_PATH"))
-GRIT_URL = try_get_env("GRIT_URL")
-GRIT_API_KEY = try_get_env("GRIT_API_KEY")
+API_URL = get_env_or_raise("CANVAS_API_URL")
+API_KEY = get_env_or_raise("CANVAS_API_KEY")
+DATABASE_PATH = Path(get_env_or_raise("DATABASE_PATH"))
+GRIT_URL = get_env_or_raise("GRIT_URL")
+GRIT_API_KEY = get_env_or_raise("GRIT_API_KEY")
 
 
 def get_quiz_results(
@@ -38,7 +38,6 @@ def get_quiz_results(
     cwids: list[str] = []
     scores: list[float] = []
     emails: list[str] = []
-    enrolled_year: list[datetime] = []
 
     for sub in submissions:
         student = course.get_user(sub.user_id)
@@ -50,14 +49,12 @@ def get_quiz_results(
             continue
         score = float(sub.grade.replace("%", ""))
         email: str = student.login_id
-        enrolled: datetime = student.created_at_date
 
         first_names.append(first_name)
         last_names.append(last_name)
         cwids.append(cwid)
         scores.append(score)
         emails.append(email)
-        enrolled_year.append(enrolled)
 
     is_passing = pl.col(quiz_name) >= 90
     return (
@@ -67,7 +64,6 @@ def get_quiz_results(
                 "lastName": last_names,
                 "externalId": cwids,
                 "email": emails,
-                "enrollment_date": enrolled_year,
                 quiz_name: scores,
             },
             {
@@ -75,7 +71,6 @@ def get_quiz_results(
                 "lastName": pl.Utf8,
                 "externalId": pl.Utf8,
                 "email": pl.Utf8,
-                "enrollment_date": pl.Datetime,
                 quiz_name: pl.Float32,
             },
         )
@@ -84,69 +79,54 @@ def get_quiz_results(
     )
 
 
-def get_database() -> pl.LazyFrame:
-    return pl.scan_csv(DATABASE_PATH, dtypes={"externalId": pl.Utf8})
+def upsert_grit(file: io.BytesIO) -> requests.Response:
+    session = requests.Session()
+    request = session.prepare_request(
+        requests.Request(
+            method="POST",
+            url=f"{GRIT_URL}/api/batch/user",
+            headers={"x-auth-token": GRIT_API_KEY},
+            files={"file": ("upload.csv", file.getvalue(), "text/csv")},
+        )
+    )
+    response = session.send(request)
+    return response
 
 
 def main():
     LAST_24_HOURS = datetime.now() - timedelta(hours=24)
 
-    database = get_database()
-    updated_db = database
-
     canvas = Canvas(API_URL, API_KEY)
     course = canvas.get_course(COURSE_ID)
 
     for quiz_name, quiz_id in QUIZ_IDS.items():
+        if quiz_name == "pg:Automated Tool Cabinet":
+            continue
         results = get_quiz_results(
             course,
             quiz_name,
             quiz_id,
             None,  # Change to LAST_24_HOURS in future
+        ).with_columns(
+            pl.when(pl.col(quiz_name))
+            .then(pl.lit("x"))
+            .otherwise(pl.lit(None))
+            .alias(quiz_name),
+            pl.lit("x").alias("at:Any Time"),
+            active=pl.lit("x"),
         )
 
-        updated_db = upsert(
-            updated_db, results, ["externalId", "email", "firstName", "lastName"]
-        )
+        results = results.collect()
+        if len(results) > 0:
+            continue
+        results.write_csv(f"{quiz_name}.csv")
 
-    database = database.collect()
-    database.write_csv(
-        f"{DATABASE_PATH.with_suffix('')}_{datetime.now().strftime('%Y_%m_%d_%H_%M_%S')}{DATABASE_PATH.suffix}"
-    )
+        grit_csv = io.BytesIO()
 
-    updated_db = updated_db.collect()
-    updated_db.write_csv(DATABASE_PATH)
-
-    give_to_grit = updated_db.with_columns(
-        [
-            pl.when(pl.col(c)).then(pl.lit("x")).otherwise(pl.lit(None)).alias(c)
-            for c in QUIZ_IDS.keys()
-        ],
-        active=pl.lit("x"),
-    ).drop(
-        [
-            "enrollment_date",
-            "pg:Automated Tool Cabinet",  # TODO: temporary until grit has an ATC column
-        ]
-    )
-
-    grit_csv = io.BytesIO()
-    give_to_grit.write_csv(grit_csv)
-    give_to_grit.write_csv("test.csv")
-
-    session = requests.Session()
-    req = session.prepare_request(
-        requests.Request(
-            method="POST",
-            url=f"{GRIT_URL}/api/batch/user/upsert",
-            headers={"x-auth-token": GRIT_API_KEY},
-            files={"file": grit_csv.getvalue()},
-        )
-    )
-
-    # resp = session.send(req)
-    # print(resp)
-    # print(resp.text)
+        response = upsert_grit(grit_csv)
+        if not response.ok:
+            logging.warn("Request to Grit didn't return OK")
+            logging.warn(response.text)
 
 
 if __name__ == "__main__":
