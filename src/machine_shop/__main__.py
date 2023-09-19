@@ -13,7 +13,11 @@ from dotenv import load_dotenv
 from .env import get_env_or_raise, get_quiz_ids
 
 load_dotenv()
-logging.basicConfig(filename=get_env_or_raise("LOG_FILE"), level=logging.DEBUG)
+grit_logger = logging.getLogger("grit")
+grit_logger.setLevel(logging.DEBUG)
+file_handle = logging.FileHandler(get_env_or_raise("LOG_FILE"))
+file_handle.setLevel(logging.DEBUG)
+grit_logger.addHandler(file_handle)
 
 COURSE_ID = get_env_or_raise("CANVAS_COURSE_ID")
 QUIZ_IDS = get_quiz_ids()
@@ -39,6 +43,8 @@ def get_quiz_results(
     scores: list[float] = []
     emails: list[str] = []
 
+    grit_logger.info("Getting submissions for %s", quiz_name)
+
     for sub in submissions:
         if sub.grade is None:
             continue
@@ -49,6 +55,16 @@ def get_quiz_results(
         )
         cwid: str = student.sis_user_id
         email: str = student.login_id
+
+        grit_logger.debug(
+            "received submission %s %s %s %s %s %s",
+            quiz_name,
+            cwid,
+            first_name,
+            last_name,
+            score,
+            email,
+        )
 
         first_names.append(first_name)
         last_names.append(last_name)
@@ -84,7 +100,7 @@ def upsert_grit(file: io.BytesIO) -> requests.Response:
     request = session.prepare_request(
         requests.Request(
             method="POST",
-            url=f"{GRIT_URL}/api/batch/user",
+            url=f"{GRIT_URL}/api/batch/user/upsert",
             headers={"x-auth-token": GRIT_API_KEY},
             files={"file": ("upload.csv", file.getvalue(), "text/csv")},
         )
@@ -125,10 +141,12 @@ def main():
         grit_csv = io.BytesIO()
         results.write_csv(grit_csv)
 
+        grit_logger.info(f"CSV to send: {grit_csv.getvalue().decode('utf-8')}")
+
         response = upsert_grit(grit_csv)
         if not response.ok:
-            logging.warn("Request to Grit didn't return OK")
-            logging.warn(response.text)
+            grit_logger.warning("Request to Grit didn't return OK")
+            grit_logger.warning(response.text)
 
 
 if __name__ == "__main__":
