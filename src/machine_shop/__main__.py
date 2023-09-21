@@ -1,7 +1,6 @@
 import io
 import logging
 from datetime import datetime, timedelta
-from pathlib import Path
 from typing import cast
 
 import polars as pl
@@ -17,15 +16,17 @@ grit_logger = logging.getLogger("grit")
 grit_logger.setLevel(logging.DEBUG)
 file_handle = logging.FileHandler(get_env_or_raise("LOG_FILE"))
 file_handle.setLevel(logging.DEBUG)
+stderr_handler = logging.StreamHandler()
 grit_logger.addHandler(file_handle)
+grit_logger.addHandler(stderr_handler)
 
 COURSE_ID = get_env_or_raise("CANVAS_COURSE_ID")
 QUIZ_IDS = get_quiz_ids()
 API_URL = get_env_or_raise("CANVAS_API_URL")
 API_KEY = get_env_or_raise("CANVAS_API_KEY")
-DATABASE_PATH = Path(get_env_or_raise("DATABASE_PATH"))
 GRIT_URL = get_env_or_raise("GRIT_URL")
 GRIT_API_KEY = get_env_or_raise("GRIT_API_KEY")
+UPLOAD_TO_GRIT = get_env_or_raise("UPLOAD_TO_GRIT") == "true"
 
 
 def get_quiz_results(
@@ -110,7 +111,9 @@ def upsert_grit(file: io.BytesIO) -> requests.Response:
 
 
 def main():
-    LAST_24_HOURS = datetime.now() - timedelta(hours=24)
+    start_time = datetime.now()
+    grit_logger.info(f"Starting at {start_time}\n")
+    last_24_hours = datetime.now() - timedelta(hours=24)
 
     canvas = Canvas(API_URL, API_KEY)
     course = canvas.get_course(COURSE_ID)
@@ -141,12 +144,16 @@ def main():
         grit_csv = io.BytesIO()
         results.write_csv(grit_csv)
 
-        grit_logger.info(f"CSV to send: {grit_csv.getvalue().decode('utf-8')}")
+        grit_logger.info(f"CSV to send:\n{grit_csv.getvalue().decode('utf-8')}")
 
-        response = upsert_grit(grit_csv)
-        if not response.ok:
-            grit_logger.warning("Request to Grit didn't return OK")
-            grit_logger.warning(response.text)
+        if UPLOAD_TO_GRIT:
+            response = upsert_grit(grit_csv)
+            if not response.ok:
+                grit_logger.warning("Request to Grit didn't return OK")
+                grit_logger.warning(response.text)
+
+    time_elapsed = datetime.now() - start_time
+    grit_logger.info(f"Completed in {time_elapsed.total_seconds():.2f} seconds")
 
 
 if __name__ == "__main__":
