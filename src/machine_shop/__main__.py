@@ -33,7 +33,7 @@ def get_quiz_results(
     course: Course,
     quiz_name: str,
     quiz_id: int,
-    since_time: datetime | None = None,
+    since_time: datetime,
 ) -> pl.LazyFrame:
     assignment = course.get_assignment(quiz_id)
     submissions = assignment.get_submissions(start_time=since_time)
