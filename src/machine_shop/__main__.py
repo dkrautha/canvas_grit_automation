@@ -119,14 +119,11 @@ def main():
     course = canvas.get_course(COURSE_ID)
 
     for quiz_name, quiz_id in QUIZ_IDS.items():
-        # TODO: not currently in grit, so we skip for now
-        if quiz_name == "pg:Automated Tool Cabinet":
-            continue
         results = get_quiz_results(
             course,
             quiz_name,
             quiz_id,
-            None,  # Change to LAST_24_HOURS in future
+            last_24_hours,
         ).with_columns(
             pl.when(pl.col(quiz_name))
             .then(pl.lit("x"))
