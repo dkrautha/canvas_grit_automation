@@ -33,10 +33,9 @@ def get_quiz_results(
     course: Course,
     quiz_name: str,
     quiz_id: int,
-    since_time: datetime,
 ) -> pl.LazyFrame:
     assignment = course.get_assignment(quiz_id)
-    submissions = assignment.get_submissions(start_time=since_time)
+    submissions = assignment.get_submissions()
 
     first_names: list[str] = []
     last_names: list[str] = []
@@ -113,7 +112,6 @@ def upsert_grit(file: io.BytesIO) -> requests.Response:
 def main():
     start_time = datetime.now()
     grit_logger.info(f"Starting at {start_time}\n")
-    last_24_hours = datetime.now() - timedelta(hours=24)
 
     canvas = Canvas(API_URL, API_KEY)
     course = canvas.get_course(COURSE_ID)
@@ -123,7 +121,6 @@ def main():
             course,
             quiz_name,
             quiz_id,
-            last_24_hours,
         ).with_columns(
             pl.when(pl.col(quiz_name))
             .then(pl.lit("x"))
