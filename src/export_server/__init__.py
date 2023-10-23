@@ -2,6 +2,7 @@ import io
 from datetime import datetime
 from pathlib import Path
 
+import polars as pl
 import requests
 from dotenv import load_dotenv
 from flask import Flask, send_file
@@ -27,8 +28,10 @@ def grit_export():
         )
     )
     response = session.send(request)
-    bytesio = io.BytesIO(response.content)
+    as_excel = io.BytesIO(response.content)
+    as_csv = io.BytesIO()
+    pl.read_excel(as_excel).write_csv(as_csv)
 
     timestamp = datetime.now().strftime("%Y_%m_%d_%H_%M")
-    Path(f"grit_export_{timestamp}.xlsx").write_bytes(bytesio.getvalue())
-    return send_file(bytesio, mimetype="application/vnd.ms-excel")
+    Path(f"grit_export_{timestamp}.csv").write_bytes(as_csv.getvalue())
+    return send_file(as_csv)
