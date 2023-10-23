@@ -6,7 +6,7 @@ groups = ["default"]
 cross_platform = true
 static_urls = false
 lock_version = "4.3"
-content_hash = "sha256:179ab0009a87ede0c005010240ac8414bbe039e3c53e28eae9a43c93d552d205"
+content_hash = "sha256:b7e045d5716c96fed63994bb323bbbafecc2e90380eb402e006091e49aa6ca38"
 
 [[package]]
 name = "arrow"
@@ -297,4 +297,13 @@ dependencies = [
 files = [
     {file = "werkzeug-3.0.0-py3-none-any.whl", hash = "sha256:cbb2600f7eabe51dbc0502f58be0b3e1b96b893b05695ea2b35b43d4de2d9962"},
     {file = "werkzeug-3.0.0.tar.gz", hash = "sha256:3ffff4dcc32db52ef3cc94dff3000a3c2846890f3a5a51800a27b909c5e770f0"},
+]
+
+[[package]]
+name = "xlsx2csv"
+version = "0.8.1"
+summary = "xlsx to csv converter"
+files = [
+    {file = "xlsx2csv-0.8.1-py3-none-any.whl", hash = "sha256:6c36c0295d64f231570479e514d6163ce135af3c431a1705b073230bedaef9f2"},
+    {file = "xlsx2csv-0.8.1.tar.gz", hash = "sha256:7ecd6d2bc2426f2e432f4fdac12211e1976d3cbb65f9033e1eda65edda2045e3"},
 ]
