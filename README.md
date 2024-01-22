@@ -7,7 +7,7 @@ nix-direnv
 direnv
 
 add hook to .bashrc
-add hook to .direnvrc
+add hook to .config/direnv/direnvrc
 
 cd into folder with code
 nix-direnv installs python and pdm
