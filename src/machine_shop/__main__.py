@@ -96,7 +96,7 @@ def get_quiz_results(
                 "externalId": cwid,
                 "email": email,
                 **{q: "x" if q == quiz_name else "" for q in QUIZ_NAME_TO_IDS.keys()},
-            }
+            },
         )
         df = df.vstack(row)
 
@@ -143,9 +143,9 @@ def main():
         active=pl.lit("x"),
     )
 
-    # if no changes for a quiz, then skip sending to grit
+    # if no changes, then skip sending to grit
     if len(df) == 0:
-        grit_logger.info("N changes")
+        grit_logger.info("No changes")
         time_elapsed = datetime.now() - start_time
         grit_logger.info(f"Completed in {time_elapsed.total_seconds():.2f} seconds")
         return
