@@ -1,9 +1,9 @@
 [Unit]
-Description=Run Canvas Grit sync every 15 minutes
+Description=Run Canvas Grit sync every 30 minutes
 
 [Timer]
 OnBootSec=5min
-OnUnitActiveSec=20min
+OnUnitActiveSec=30min
 
 [Install]
 WantedBy=timers.target
