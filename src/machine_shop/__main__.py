@@ -23,6 +23,7 @@ GRIT_URL = get_env_or_raise("GRIT_URL")
 GRIT_API_KEY = get_env_or_raise("GRIT_API_KEY")
 UPLOAD_TO_GRIT = get_env_or_raise("UPLOAD_TO_GRIT") == "true"
 LOG_FOLDER = Path(get_env_or_raise("LOG_FOLDER"))
+BACKUP_FOLDER = Path(get_env_or_raise("BACKUP_FOLDER"))
 
 grit_logger = logging.getLogger("grit")
 program_start = datetime.now(timezone.utc)
@@ -163,6 +164,24 @@ def main():
 
     time_elapsed = datetime.now() - start_time
     grit_logger.info(f"Completed in {time_elapsed.total_seconds():.2f} seconds")
+
+    grit_logger.info("Pulling new backup from Grit now")
+
+    session = requests.Session()
+    request = session.prepare_request(
+        requests.Request(
+            method="GET",
+            url=f"{GRIT_URL}/api/batch/user/export",
+            headers={"x-auth-token": GRIT_API_KEY},
+        )
+    )
+    response = session.send(request)
+    as_excel = io.BytesIO(response.content)
+
+    timestamp = datetime.now().strftime("%Y_%m_%d_%H_%M")
+    filepath = BACKUP_FOLDER / f"grit_export_{timestamp}.csv"
+    filepath.touch()
+    pl.read_excel(as_excel).write_csv(filepath)
 
 
 if __name__ == "__main__":
