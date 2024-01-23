@@ -123,7 +123,12 @@ def upsert_grit(file: io.BytesIO) -> requests.Response:
     request = session.prepare_request(
         requests.Request(
             method="POST",
-            url=f"{GRIT_URL}/api/batch/user/upsert",
+            url=f"{GRIT_URL}/api/batch/user/upsert?"
+            "processPermissionGroups=true&"
+            "processRFiDCards=false&"
+            "processDemographics=false&"
+            "processAccessTimes=true&"
+            "processMobileGritCard=false",
             headers={"x-auth-token": GRIT_API_KEY},
             files={"file": ("upload.csv", file.getvalue(), "text/csv")},
         )
