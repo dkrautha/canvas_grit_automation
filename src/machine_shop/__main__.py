@@ -26,9 +26,12 @@ LOG_FOLDER = Path(get_env_or_raise("LOG_FOLDER"))
 BACKUP_FOLDER = Path(get_env_or_raise("BACKUP_FOLDER"))
 
 grit_logger = logging.getLogger("grit")
+# TODO: should this be upper snake case because it's a constant?
 program_start = datetime.now(timezone.utc)
 
 
+# TODO: refactor this to a config file and use modern logging practices
+# https://www.youtube.com/watch?v=9L77QExPmI0
 def setup_logging():
     grit_logger.setLevel(logging.DEBUG)
     timestamp = datetime.now().strftime("%Y_%m_%d")
@@ -44,6 +47,7 @@ def setup_logging():
 setup_logging()
 
 
+# TODO: uses globals, should they be made to be parameters?
 def get_quiz_results(
     course: Course,
 ) -> pl.DataFrame:
@@ -101,6 +105,7 @@ def get_quiz_results(
         )
         df = df.vstack(row)
 
+    # TODO: name this better
     gb = ["firstName", "lastName", "externalId", "email"]
     quiz_cols = pl.all().exclude(gb)
     df = df.group_by(gb).agg(quiz_cols.str.concat(""))
@@ -113,11 +118,11 @@ def get_quiz_results(
             .keep_name()
         ]
     )
-    print(df)
 
     return df
 
 
+# TODO: function name sounds kinda jank
 def upsert_grit(file: io.BytesIO) -> requests.Response:
     session = requests.Session()
     request = session.prepare_request(
@@ -138,6 +143,7 @@ def upsert_grit(file: io.BytesIO) -> requests.Response:
 
 
 def main():
+    # TODO: getting start time here, do we even need the global?
     start_time = datetime.now()
     grit_logger.info(f"Starting at {start_time}\n")
 
@@ -152,6 +158,7 @@ def main():
     # if no changes, then skip sending to grit
     if len(df) == 0:
         grit_logger.info("No changes")
+        # TODO: code duplication, can this be refactored?
         time_elapsed = datetime.now() - start_time
         grit_logger.info(f"Completed in {time_elapsed.total_seconds():.2f} seconds")
         return
@@ -170,6 +177,7 @@ def main():
     time_elapsed = datetime.now() - start_time
     grit_logger.info(f"Completed in {time_elapsed.total_seconds():.2f} seconds")
 
+    # TODO: refactor all of this into a function?
     grit_logger.info("Pulling new backup from Grit now")
 
     session = requests.Session()
