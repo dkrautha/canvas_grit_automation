@@ -3,7 +3,7 @@ Description=Gets the latest Grit user list, saves a backup, and sends it to whoe
 
 [Service]
 WorkingDirectory=/home/pi/canvas_grit_automation
-ExecStart=/home/pi/canvas_grit_automation/.venv/bin/gunicorn --bind 0.0.0.0:42069 export_server:app
+ExecStart=filebrowser -r backup logs
 Restart=on-failure
 
 [Install]

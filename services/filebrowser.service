@@ -1,0 +1,10 @@
+[Unit]
+Description=Shows the logs and backup folder in a pretty web UI
+
+[Service]
+WorkingDirectory=/home/pi/canvas_grit_automation
+ExecStart=filebrowser
+Restart=on-failure
+
+[Install]
+WantedBy=default.target
