@@ -3,7 +3,7 @@ Description=Shows the logs and backup folder in a pretty web UI
 
 [Service]
 WorkingDirectory=/home/pi/canvas_grit_automation
-ExecStart=filebrowser
+ExecStart=/nix/var/nix/profiles/default/bin/nix run .#filebrowser -- --address=0.0.0.0 -r ./files 
 Restart=on-failure
 
 [Install]

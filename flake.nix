@@ -21,5 +21,11 @@
           ++ (with pkgs.python311Packages; [pip]);
       };
     });
+    apps = forEachSupportedSystem ({pkgs}: {
+      filebrowser = {
+        type = "app";
+        program = "${pkgs.filebrowser}/bin/filebrowser";
+      };
+    });
   };
 }
