@@ -109,13 +109,12 @@ def get_quiz_results(
     gb = ["firstName", "lastName", "externalId", "email"]
     quiz_cols = pl.all().exclude(gb)
     df = df.group_by(gb).agg(quiz_cols.str.concat(""))
-    print(df)
     df = df.with_columns(
         [
-            pl.when(quiz_cols.str.lengths() == 0)
+            pl.when(quiz_cols.str.len_bytes() == 0)
             .then(pl.lit(None))
             .otherwise(pl.lit("x"))
-            .keep_name()
+            .name.keep()
         ]
     )
 
@@ -128,12 +127,13 @@ def upsert_grit(file: io.BytesIO) -> requests.Response:
     request = session.prepare_request(
         requests.Request(
             method="POST",
-            url=f"{GRIT_URL}/api/batch/user/upsert?"
-            "processPermissionGroups=true&"
-            "processRFiDCards=false&"
-            "processDemographics=false&"
-            "processAccessTimes=true&"
-            "processMobileGritCard=false",
+            url=f"{GRIT_URL}/api/batch/user/upsert",
+            # url=f"{GRIT_URL}/api/batch/user/upsert?",
+            # "processPermissionGroups=true&"
+            # "processRFiDCards=false&"
+            # "processDemographics=false&"
+            # "processAccessTimes=true&"
+            # "processMobileGritCard=false",
             headers={"x-auth-token": GRIT_API_KEY},
             files={"file": ("upload.csv", file.getvalue(), "text/csv")},
         )
@@ -169,6 +169,7 @@ def main():
     grit_logger.info(f"CSV to send:\n{grit_csv.getvalue().decode('utf-8')}")
 
     if UPLOAD_TO_GRIT:
+        grit_logger.info("sending to grit now")
         response = upsert_grit(grit_csv)
         if not response.ok:
             grit_logger.warning("Request to Grit didn't return OK")
