@@ -21,10 +21,10 @@
         packages = with pkgs;
           [python311 virtualenv pdm filebrowser]
           ++ (with pkgs.python311Packages; [pip]);
-      };
       shellHook = ''
         eval $(pdm venv activate)
       '';
+      };
     });
     apps = forEachSupportedSystem ({pkgs}: {
       filebrowser = {
