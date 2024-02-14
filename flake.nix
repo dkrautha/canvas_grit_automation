@@ -1,7 +1,9 @@
 {
   description = "A Nix-flake-based Python development environment";
 
-  inputs.nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1.*.tar.gz";
+  inputs = {
+    nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1.*.tar.gz";
+  };
 
   outputs = {
     self,
@@ -20,6 +22,9 @@
           [python311 virtualenv pdm filebrowser]
           ++ (with pkgs.python311Packages; [pip]);
       };
+      shellHook = ''
+        eval $(pdm venv activate)
+      '';
     });
     apps = forEachSupportedSystem ({pkgs}: {
       filebrowser = {
