@@ -8,11 +8,8 @@ import polars as pl
 import requests
 from canvasapi import Canvas
 from canvasapi.course import Course
-from dotenv import load_dotenv
 
 from .env import get_env_or_raise, get_quiz_ids
-
-load_dotenv()
 
 COURSE_ID = get_env_or_raise("CANVAS_COURSE_ID")
 QUIZ_NAME_TO_IDS = get_quiz_ids()

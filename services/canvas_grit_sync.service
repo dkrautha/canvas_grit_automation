@@ -2,5 +2,5 @@
 Description=Gets new quiz submissions from and grants permissions on the Grit system to those users
 
 [Service]
-WorkingDirectory=/home/pi/canvas_grit_automation
-ExecStart=/home/pi/canvas_grit_automation/.venv/bin/python3 -m machine_shop
+WorkingDirectory=%h/canvas_grit_automation
+ExecStart=/nix/var/nix/profiles/default/bin/nix run .#canvas run

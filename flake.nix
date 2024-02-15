@@ -22,6 +22,7 @@
           [python311 virtualenv pdm filebrowser just]
           ++ (with pkgs.python311Packages; [pip]);
         shellHook = ''
+          source ./.env
           eval $(pdm venv activate)
         '';
       };
@@ -31,7 +32,7 @@
         type = "app";
         program = "${pkgs.filebrowser}/bin/filebrowser";
       };
-      default = {
+      canvas = {
         type = "app";
         program = "${pkgs.just}/bin/just";
       };
