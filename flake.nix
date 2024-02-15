@@ -19,17 +19,21 @@
     devShells = forEachSupportedSystem ({pkgs}: {
       default = pkgs.mkShell {
         packages = with pkgs;
-          [python311 virtualenv pdm filebrowser]
+          [python311 virtualenv pdm filebrowser just]
           ++ (with pkgs.python311Packages; [pip]);
-      shellHook = ''
-        eval $(pdm venv activate)
-      '';
+        shellHook = ''
+          eval $(pdm venv activate)
+        '';
       };
     });
     apps = forEachSupportedSystem ({pkgs}: {
       filebrowser = {
         type = "app";
         program = "${pkgs.filebrowser}/bin/filebrowser";
+      };
+      default = {
+        type = "app";
+        program = "${pkgs.just}/bin/just";
       };
     });
   };
