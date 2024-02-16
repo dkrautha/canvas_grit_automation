@@ -49,7 +49,7 @@
 
       devShells.default = pkgs.mkShell {
         inputsFrom = [machine_shop];
-        packages = [pkgs.poetry];
+        packages = [pkgs.poetry pkgs.just];
       };
 
       apps = let
