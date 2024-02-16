@@ -2,7 +2,7 @@
 name = "machine-shop"
 version = "0.1.0"
 description = ""
-authors = ["David Krauthamer <dkrautha@pm.me>"]
+authors = ["David Krauthamer <dkrautha@pm.me>", "Theodore Rogalski <rogalski.theo@gmail.com>"]
 license = "MIT"
 readme = "README.md"
 packages = [
