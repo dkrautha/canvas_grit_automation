@@ -21,13 +21,14 @@
       pkgs = nixpkgs.legacyPackages.${system};
       inherit (poetry2nix.lib.mkPoetry2Nix {inherit pkgs;}) mkPoetryApplication overrides;
       machine_shop = self.packages.${system}.machine_shop;
+      sync_cmd = "${machine_shop}/bin/sync";
     in {
       packages = {
         dockerImage = pkgs.dockerTools.buildImage {
-          name = "canvas";
+          name = "sync";
           tag = "latest";
           config = {
-            Cmd = ["${machine_shop}/bin/canvas"];
+            Cmd = [sync_cmd];
           };
         };
 
@@ -54,7 +55,7 @@
       apps = let
         sync = {
           type = "app";
-          program = "${machine_shop}/bin/sync";
+          program = sync_cmd;
         };
       in {
         filebrowser = {

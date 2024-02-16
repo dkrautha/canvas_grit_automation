@@ -22,7 +22,7 @@ xlsx2csv = "^0.8.2"
 pytest = "^8.0.0"
 
 [tool.poetry.scripts]
-canvas = "machine_shop:main"
+sync = "sync:main"
 export = "export_server:export"
 
 [build-system]
