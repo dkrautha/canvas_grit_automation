@@ -2,40 +2,55 @@
   description = "A Nix-flake-based Python development environment";
 
   inputs = {
-    nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1.*.tar.gz";
+    flake-utils.url = "github:numtide/flake-utils";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    poetry2nix = {
+      url = "github:nix-community/poetry2nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
+    };
   };
 
   outputs = {
     self,
     nixpkgs,
-  }: let
-    supportedSystems = ["x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin"];
-    forEachSupportedSystem = f:
-      nixpkgs.lib.genAttrs supportedSystems (system:
-        f {
-          pkgs = import nixpkgs {inherit system;};
-        });
-  in {
-    devShells = forEachSupportedSystem ({pkgs}: {
-      default = pkgs.mkShell {
-        packages = with pkgs;
-          [python311 virtualenv pdm filebrowser just]
-          ++ (with pkgs.python311Packages; [pip]);
-        shellHook = ''
-          source ./.env
-          eval $(pdm venv activate)
-        '';
+    flake-utils,
+    poetry2nix,
+  }:
+    flake-utils.lib.eachDefaultSystem (system: let
+      pkgs = nixpkgs.legacyPackages.${system};
+      inherit (poetry2nix.lib.mkPoetry2Nix {inherit pkgs;}) mkPoetryApplication overrides;
+    in {
+      packages = {
+        canvas = mkPoetryApplication {
+          projectDir = self;
+          overrides = overrides.withDefaults (final: prev: {
+            polars = prev.polars.override {
+              preferWheel = true;
+            };
+            canvasapi = prev.canvasapi.overridePythonAttrs (old: {
+              buildInputs = (old.buildInputs or []) ++ [prev.setuptools];
+            });
+          });
+        };
+
+        default = self.packages.${system}.canvas;
+      };
+
+      devShells.default = pkgs.mkShell {
+        inputsFrom = [self.packages.${system}.canvas];
+        packages = [pkgs.poetry];
+      };
+
+      apps = {
+        filebrowser = {
+          type = "app";
+          program = "${pkgs.filebrowser}/bin/filebrowser";
+        };
+        default = {
+          type = "app";
+          program = "${self.packages.${system}.canvas}/bin/canvas";
+        };
       };
     });
-    apps = forEachSupportedSystem ({pkgs}: {
-      filebrowser = {
-        type = "app";
-        program = "${pkgs.filebrowser}/bin/filebrowser";
-      };
-      canvas = {
-        type = "app";
-        program = "${pkgs.just}/bin/just";
-      };
-    });
-  };
 }

@@ -1,19 +1,26 @@
-[project]
-name = "machine_shop"
+[tool.poetry]
+name = "machine-shop"
 version = "0.1.0"
 description = ""
-authors = [{ name = "David Krauthamer", email = "dkrautha@pm.me" }]
-dependencies = [
-    "polars>=0.18.15",
-    "canvasapi>=3.2.0",
-    "requests>=2.31.0",
-    "flask>=3.0.0",
-    "gunicorn>=21.2.0",
-    "xlsx2csv>=0.8.1",
-]
-requires-python = ">=3.11"
+authors = ["David Krauthamer <dkrautha@pm.me>"]
+license = "MIT"
 readme = "README.md"
-license = { text = "MIT" }
 
-[project.scripts]
-machine_shop = "machine_shop:main"
+[tool.poetry.dependencies]
+python = "^3.11"
+polars = "^0.20.7"
+canvasapi = "^3.2.0"
+requests = "^2.31.0"
+Flask = "^3.0.2"
+gunicorn = "^21.2.0"
+xlsx2csv = "^0.8.2"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "8.0.0"
+
+[tool.poetry.scripts]
+canvas = "machine_shop:main"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
