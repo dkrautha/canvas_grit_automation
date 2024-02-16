@@ -28,8 +28,4 @@ build_docker:
     docker load < result
 
 run_docker_sync: build_docker
-    docker run --rm --env-file ./.env \
-        -v ./logs:/logs \
-        -v ./backup:/backup \
-        --user $(id -u):$(id -g) \
-        sync:latest
+    bash docker_wrapper.sh
