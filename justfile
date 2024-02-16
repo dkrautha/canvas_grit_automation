@@ -1,16 +1,25 @@
 _default:
     just --list
 
-setup:
-    mkdir -p .venv/ 
-    pdm install
+build_nix:
+    nix build .
 
-activate: 
-    source ./.env
-    eval $(pdm venv activate)
+run_sync:
+    nix run .#sync
 
-build: setup
-    pdm build 
+run_export:
+    nix run .#export
 
-run:
-    machine_shop
+run_filebrowser:
+    nix run .#filebrowser -- --address=0.0.0.0 -r $HOME
+
+build_docker:
+    nix build .#dockerImage
+    docker load < result
+
+run_docker: build_docker
+    docker run --rm --env-file ./.env \
+        -v ./logs:/logs \
+        -v ./backup:/backup \
+        --user $(id -u):$(id -g) \
+        canvas:latest

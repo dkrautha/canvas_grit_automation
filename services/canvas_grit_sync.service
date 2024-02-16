@@ -3,4 +3,4 @@ Description=Gets new quiz submissions from and grants permissions on the Grit sy
 
 [Service]
 WorkingDirectory=%h/canvas_grit_automation
-ExecStart=/nix/var/nix/profiles/default/bin/nix run .#canvas run
+ExecStart=/nix/var/nix/profiles/default/bin/nix run .#sync run

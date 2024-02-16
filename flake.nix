@@ -20,9 +20,18 @@
     flake-utils.lib.eachDefaultSystem (system: let
       pkgs = nixpkgs.legacyPackages.${system};
       inherit (poetry2nix.lib.mkPoetry2Nix {inherit pkgs;}) mkPoetryApplication overrides;
+      machine_shop = self.packages.${system}.machine_shop;
     in {
       packages = {
-        canvas = mkPoetryApplication {
+        dockerImage = pkgs.dockerTools.buildImage {
+          name = "canvas";
+          tag = "latest";
+          config = {
+            Cmd = ["${machine_shop}/bin/canvas"];
+          };
+        };
+
+        machine_shop = mkPoetryApplication {
           projectDir = self;
           overrides = overrides.withDefaults (final: prev: {
             polars = prev.polars.override {
@@ -34,23 +43,30 @@
           });
         };
 
-        default = self.packages.${system}.canvas;
+        default = machine_shop;
       };
 
       devShells.default = pkgs.mkShell {
-        inputsFrom = [self.packages.${system}.canvas];
+        inputsFrom = [machine_shop];
         packages = [pkgs.poetry];
       };
 
-      apps = {
+      apps = let
+        sync = {
+          type = "app";
+          program = "${machine_shop}/bin/sync";
+        };
+      in {
         filebrowser = {
           type = "app";
           program = "${pkgs.filebrowser}/bin/filebrowser";
         };
-        default = {
+        export = {
           type = "app";
-          program = "${self.packages.${system}.canvas}/bin/canvas";
+          program = "${machine_shop}/bin/export";
         };
+        sync = sync;
+        default = sync;
       };
     });
 }

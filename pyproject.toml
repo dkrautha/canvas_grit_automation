@@ -5,6 +5,10 @@ description = ""
 authors = ["David Krauthamer <dkrautha@pm.me>"]
 license = "MIT"
 readme = "README.md"
+packages = [
+    { include = "sync", from = "src" },
+    { include = "export_server", from = "src" },
+]
 
 [tool.poetry.dependencies]
 python = "^3.11"
@@ -12,14 +16,14 @@ polars = "^0.20.7"
 canvasapi = "^3.2.0"
 requests = "^2.31.0"
 Flask = "^3.0.2"
-gunicorn = "^21.2.0"
 xlsx2csv = "^0.8.2"
 
 [tool.poetry.group.dev.dependencies]
-pytest = "8.0.0"
+pytest = "^8.0.0"
 
 [tool.poetry.scripts]
 canvas = "machine_shop:main"
+export = "export_server:export"
 
 [build-system]
 requires = ["poetry-core"]

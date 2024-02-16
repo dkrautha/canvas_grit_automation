@@ -2,8 +2,8 @@
 Description=Gets the latest Grit user list, saves a backup, and sends it to whoever asked
 
 [Service]
-WorkingDirectory=/home/pi/canvas_grit_automation
-ExecStart=filebrowser -r backup logs
+WorkingDirectory=%h/canvas_grit_automation
+ExecStart=/nix/var/nix/profiles/default/bin/nix run .#export
 Restart=on-failure
 
 [Install]

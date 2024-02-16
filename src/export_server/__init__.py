@@ -1,14 +1,12 @@
 from pathlib import Path
 
-from dotenv import load_dotenv
+import polars as pl
 from flask import Flask, send_file
-
-from machine_shop.env import get_env_or_raise
+from sync.env import get_env_or_raise
 
 app = Flask(__name__)
 
 
-load_dotenv()
 BACKUP_FOLDER = Path(get_env_or_raise("BACKUP_FOLDER"))
 
 
@@ -20,9 +18,25 @@ def grit_export():
     if most_recent_file is None:
         return "No files found", 404
 
+    data = pl.read_csv(most_recent_file).with_columns(
+        pl.col(
+            [
+                "firstName",
+                "lastName",
+                "email" "pg:ATC User",
+                "pg:ATC Supervisor",
+                "pg:ATC Admin",
+            ]
+        )
+    )
+
     return send_file(
         most_recent_file,
         mimetype="text/csv",
         as_attachment=True,
         download_name="grit_export.csv",
     )
+
+
+def main():
+    app.run(host="0.0.0.0", port=5000)
