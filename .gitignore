@@ -168,3 +168,5 @@ backup/
 
 # don't commit the filebrowser db to source control
 filebrowser.db
+result/
+result
