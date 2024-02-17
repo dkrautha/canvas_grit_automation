@@ -6,8 +6,8 @@ authors = ["David Krauthamer <dkrautha@pm.me>", "Theodore Rogalski <rogalski.the
 license = "MIT"
 readme = "README.md"
 packages = [
-    { include = "sync", from = "src" },
-    { include = "export_server", from = "src" },
+    { include = "sync", from = "sync" },
+    { include = "export_server", from = "export_server" },
 ]
 
 [tool.poetry.dependencies]
@@ -20,6 +20,7 @@ xlsx2csv = "^0.8.2"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.0.0"
+ruff = "^0.2.1"
 
 [tool.poetry.scripts]
 sync = "sync:main"

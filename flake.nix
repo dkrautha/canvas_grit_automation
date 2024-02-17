@@ -1,27 +1,40 @@
 {
-  description = "A Nix-flake-based Python development environment";
+  description = "SIT Machine Shop and MakerSpace Automation";
 
   inputs = {
-    flake-utils.url = "github:numtide/flake-utils";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    utils.url = "github:numtide/flake-utils";
     poetry2nix = {
       url = "github:nix-community/poetry2nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "flake-utils";
+      inputs = {
+        flake-utils.follows = "utils";
+        nixpkgs.follows = "nixpkgs";
+      };
     };
   };
 
-  outputs = {
+  outputs = inputs @ {
     self,
     nixpkgs,
-    flake-utils,
-    poetry2nix,
+    utils,
+    ...
   }:
-    flake-utils.lib.eachDefaultSystem (system: let
+    utils.lib.eachDefaultSystem (system: let
       pkgs = nixpkgs.legacyPackages.${system};
-      inherit (poetry2nix.lib.mkPoetry2Nix {inherit pkgs;}) mkPoetryApplication overrides;
+      poetry2nix = inputs.poetry2nix.lib.mkPoetry2Nix {inherit pkgs;};
       machine_shop = self.packages.${system}.machine_shop;
       sync_cmd = "${machine_shop}/bin/sync";
+      overrides = poetry2nix.overrides.withDefaults (final: prev: {
+        polars = prev.polars.override {
+          preferWheel = true;
+        };
+        ruff = prev.ruff.override {
+          preferWheel = true;
+        };
+        canvasapi = prev.canvasapi.overridePythonAttrs (old: {
+          buildInputs = (old.buildInputs or []) ++ [prev.setuptools];
+        });
+      });
     in {
       packages = {
         dockerImage = pkgs.dockerTools.buildImage {
@@ -32,24 +45,27 @@
           };
         };
 
-        machine_shop = mkPoetryApplication {
-          projectDir = self;
-          overrides = overrides.withDefaults (final: prev: {
-            polars = prev.polars.override {
-              preferWheel = true;
-            };
-            canvasapi = prev.canvasapi.overridePythonAttrs (old: {
-              buildInputs = (old.buildInputs or []) ++ [prev.setuptools];
-            });
-          });
+        machine_shop = poetry2nix.mkPoetryApplication {
+          projectDir = ./.;
+          overrides = overrides;
         };
 
         default = machine_shop;
       };
 
-      devShells.default = pkgs.mkShell {
-        inputsFrom = [machine_shop];
-        packages = [pkgs.poetry pkgs.just];
+      devsShells.default = pkgs.mkShell {
+        packages = with pkgs; [
+          poetry
+          just
+
+          (poetry2nix.mkPoetryEnv {
+            projectDir = ./.;
+            overrides = overrides;
+            editablePackageSources = {
+              sync = ./sync;
+            };
+          })
+        ];
       };
 
       apps = let
