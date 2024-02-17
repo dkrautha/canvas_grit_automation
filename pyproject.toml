@@ -2,13 +2,13 @@
 name = "machine-shop"
 version = "0.1.0"
 description = ""
-authors = ["David Krauthamer <dkrautha@pm.me>", "Theodore Rogalski <rogalski.theo@gmail.com>"]
+authors = [
+    "David Krauthamer <dkrautha@pm.me>",
+    "Theodore Rogalski <rogalski.theo@gmail.com>",
+]
 license = "MIT"
 readme = "README.md"
-packages = [
-    { include = "sync", from = "sync" },
-    { include = "export_server", from = "export_server" },
-]
+packages = [{ include = "sync" }, { include = "export_server" }]
 
 [tool.poetry.dependencies]
 python = "^3.11"

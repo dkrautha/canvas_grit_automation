@@ -53,20 +53,18 @@
         default = machine_shop;
       };
 
-      devsShells.default = pkgs.mkShell {
-        packages = with pkgs; [
-          poetry
-          just
-
-          (poetry2nix.mkPoetryEnv {
-            projectDir = ./.;
-            overrides = overrides;
-            editablePackageSources = {
-              sync = ./sync;
-            };
-          })
-        ];
-      };
+      devShells.default = let
+        env = poetry2nix.mkPoetryEnv {
+          projectDir = ./.;
+          overrides = overrides;
+          editablePackageSources = {
+            sync = ./sync;
+          };
+        };
+      in
+        env.env.overrideAttrs (old: {
+          nativeBuildInputs = (old.nativeBuildInputs or []) ++ [pkgs.poetry pkgs.just pkgs.dive];
+        });
 
       apps = let
         sync = {
