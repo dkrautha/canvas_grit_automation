@@ -59,6 +59,7 @@
           overrides = overrides;
           editablePackageSources = {
             sync = ./sync;
+            export_server = ./export_server;
           };
         };
       in
