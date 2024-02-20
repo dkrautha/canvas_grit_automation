@@ -1,3 +1,5 @@
+---
+version: "3.8"
 services:
   sync:
     container_name: sync
@@ -8,3 +10,26 @@ services:
     volumes:
       - ./logs:/logs
       - ./backup:/backup
+
+  filebrowser:
+    image: hurlenko/filebrowser
+    user: "${USERID}:${GROUPID}"
+    restart: unless-stopped
+    container_name: filebrowser
+    volumes:
+      - ./:/data
+      - ./filebrowser_config:/config
+    ports:
+      - 8080:8080
+    environment:
+      - FB_BASEURL=/filebrowser
+
+  wetty:
+    container_name: wetty
+    image: wettyoss/wetty:2.5.0
+    user: ${USERID}:${GROUPID}
+    ports:
+      - 3333:3000
+    environment:
+      - SSHHOST=localhost
+      - SSHUSER=pi

@@ -73,10 +73,6 @@
           program = sync_cmd;
         };
       in {
-        filebrowser = {
-          type = "app";
-          program = "${pkgs.filebrowser}/bin/filebrowser";
-        };
         export = {
           type = "app";
           program = "${machine_shop}/bin/export";

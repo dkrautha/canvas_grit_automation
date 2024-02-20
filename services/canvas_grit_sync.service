@@ -1,6 +1,0 @@
-[Unit]
-Description=Gets new quiz submissions from and grants permissions on the Grit system to those users
-
-[Service]
-WorkingDirectory=%h/canvas_grit_automation
-ExecStart=bash docker_wrapper.sh
