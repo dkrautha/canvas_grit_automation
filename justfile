@@ -1,21 +1,18 @@
 _default:
     just --list
 
-build_nix:
+nix_build:
     nix build .
 
-run_sync_nix:
+nix_run_sync:
     nix run .#sync
 
-run_export_nix:
+nix_run_export:
     nix run .#export
 
-run_filebrowser_nix:
-    nix run .#filebrowser -- --address=0.0.0.0 -r $HOME
-
-build_docker:
+docker_build:
     nix build .#dockerImage
     docker load < result
 
-run_docker_sync: build_docker
+docker_run: docker_build
     bash docker_wrapper.sh
