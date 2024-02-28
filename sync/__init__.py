@@ -220,7 +220,8 @@ def main():
 
     def sigint_handler(_signal, _frame):
         logging.getLogger("grit").info("Shutting down")
-        scheduler.shutdown()
+        if scheduler.running:
+            scheduler.shutdown()
         sys.exit(0)
 
     signal.signal(signal.SIGINT, sigint_handler)
