@@ -218,13 +218,15 @@ def main():
 
     scheduler = BlockingScheduler()
 
-    def sigint_handler(_signal, _frame):
-        logging.getLogger("grit").info("Shutting down")
+    def signal_handler(signal_num: int, _frame):
+        signal_name = signal.Signals(signal_num).name
+        logging.getLogger("grit").info(f"Shutting down due to signal {signal_name}")
         if scheduler.running:
             scheduler.shutdown()
         sys.exit(0)
 
-    signal.signal(signal.SIGINT, sigint_handler)
+    signal.signal(signal.SIGINT, signal_handler)
+    signal.signal(signal.SIGTERM, signal_handler)
     run()
 
     scheduler.add_job(run, "interval", minutes=30)
