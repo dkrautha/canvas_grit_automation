@@ -171,3 +171,6 @@ filebrowser.db
 result/
 result
 filebrowser_config/
+
+# don't commit actual config file to source control
+config.toml

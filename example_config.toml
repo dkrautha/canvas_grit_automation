@@ -1,0 +1,16 @@
+[canvas]
+api_url = "https://canvas.instructure.com"
+api_key = "YOUR_API_KEY"
+course_id = 12345
+
+[canvas.quizzes]
+"pg:Laser Cutter" = 440133
+
+[grit]
+api_url = "https://url.com"
+api_key = "YOUR_API_KEY"
+perform_upload = false
+
+[misc]
+backup_folder = "./backup"
+log_folder = "./logs"

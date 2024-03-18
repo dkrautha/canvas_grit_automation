@@ -41,7 +41,7 @@
           name = "sync";
           tag = "latest";
           config = {
-            Cmd = [sync_cmd];
+            Cmd = [sync_cmd "config.toml"];
           };
         };
 

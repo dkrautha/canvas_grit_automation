@@ -18,6 +18,7 @@ requests = "^2.31.0"
 Flask = "^3.0.2"
 xlsx2csv = "^0.8.2"
 apscheduler = "^3.10.4"
+pydantic = "^2.6.4"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.0.0"
@@ -26,6 +27,9 @@ ruff = "^0.2.1"
 [tool.poetry.scripts]
 sync = "sync:main"
 export = "export_server:export"
+
+[tool.ruff]
+select = ["ALL"]
 
 [build-system]
 requires = ["poetry-core"]

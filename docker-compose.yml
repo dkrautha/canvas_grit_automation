@@ -1,15 +1,13 @@
 ---
-version: "3.8"
 services:
   sync:
     container_name: sync
     image: sync:latest
-    env_file:
-      - ./.env
     user: ${USERID}:${GROUPID}
     volumes:
       - ./logs:/logs
       - ./backup:/backup
+      - ./config.toml:/config.toml
 
   filebrowser:
     image: hurlenko/filebrowser
