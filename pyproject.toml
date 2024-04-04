@@ -19,6 +19,7 @@ Flask = "^3.0.2"
 xlsx2csv = "^0.8.2"
 apscheduler = "^3.10.4"
 pydantic = "^2.6.4"
+bidict = "^0.23.1"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.0.0"
