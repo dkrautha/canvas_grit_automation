@@ -7,8 +7,7 @@ services:
     volumes:
       - ./logs:/logs
       - ./backup:/backup
-      - ./configs/config.toml:/config.toml
-      - ./configs/sync_logging_config.json:/sync_logging_config.json
+      - ./configs:/configs
 
   filebrowser:
     image: hurlenko/filebrowser
