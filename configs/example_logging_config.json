@@ -6,7 +6,7 @@
             "format": "%(levelname)s: %(message)s",
             "datefmt": "%Y-%m-%dT%H:%M:%S%z"
         },
-        "json": {
+        "jsonl": {
             "()": "jsonl_formatter.JsonlFormatter",
             "fmt_keys": {
                 "level": "levelname",
@@ -27,11 +27,18 @@
             "formatter": "simple",
             "stream": "ext://sys.stdout"
         },
-        "file": {
-            "class": "logging.handlers.RotatingFileHandler",
+        "jsonl_file": {
+            "class": "logging.handlers.TimedRotatingFileHandler",
             "level": "DEBUG",
-            "formatter": "json",
-            "filename": "logs/sync/sync.log",
+            "formatter": "jsonl",
+            "filename": "logs/sync/sync_jsonl.log",
+            "when": "midnight"
+        },
+        "plain_file": {
+            "class": "logging.handlers.TimedRotatingFileHandler",
+            "level": "DEBUG",
+            "formatter": "simple",
+            "filename": "logs/sync/sync_plaintext.log",
             "when": "midnight"
         }
     },
@@ -40,7 +47,8 @@
             "level": "DEBUG",
             "handlers": [
                 "stdout",
-                "file"
+                "jsonl_file",
+                "plain_file"
             ]
         }
     }
