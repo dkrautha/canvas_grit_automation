@@ -1,11 +1,8 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from pathlib import Path  # noqa: TCH003
 
 from pydantic import BaseModel
-
-if TYPE_CHECKING:
-    from pathlib import Path
 
 
 class CanvasConfig(BaseModel):
@@ -23,7 +20,6 @@ class GritConfig(BaseModel):
 
 class MiscConfig(BaseModel):
     backup_folder: Path
-    log_folder: Path
 
 
 class Config(BaseModel):

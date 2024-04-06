@@ -1,8 +1,11 @@
 import io
+import logging
 from typing import Self
 
 import polars as pl
 import requests
+
+logger = logging.getLogger("grit")
 
 
 class Grit:
@@ -16,7 +19,8 @@ class Grit:
         self._url = url
 
     def upsert(self: Self, df: pl.DataFrame) -> requests.Response:
-        # TODO(David): might be able to get away with just using write_csv returning a string, but unsure if requests will be happy with that
+        # TODO(David): might be able to get away with just using write_csv returning a
+        # string, but unsure if requests will be happy with that
         # leaving as is for now to not break anything
         csv = io.BytesIO()
         df.write_csv(csv)
@@ -48,4 +52,8 @@ class Grit:
         )
 
         response = self._session.send(request)
-        return pl.read_excel(response.content)
+        content = io.BytesIO(response.content)
+        return pl.read_excel(content)
+
+
+__all__ = ["Grit"]
