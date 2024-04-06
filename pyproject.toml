@@ -8,7 +8,11 @@ authors = [
 ]
 license = "MIT"
 readme = "README.md"
-packages = [{ include = "sync" }, { include = "export_server" }]
+packages = [
+    { include = "sync" },
+    { include = "export_server" },
+    { include = "json_logging" },
+]
 
 [tool.poetry.dependencies]
 python = "^3.11"
