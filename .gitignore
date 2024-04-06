@@ -166,11 +166,6 @@ logs/
 backup/
 .direnv/
 
-# don't commit the filebrowser db to source control
-filebrowser.db
+# don't commit nix build artifacts
 result/
 result
-filebrowser_config/
-
-# don't commit actual config file to source control
-config.toml
