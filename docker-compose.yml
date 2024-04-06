@@ -7,7 +7,8 @@ services:
     volumes:
       - ./logs:/logs
       - ./backup:/backup
-      - ./config.toml:/config.toml
+      - ./configs/config.toml:/config.toml
+      - ./configs/sync_logging_config.json:/sync_logging_config.json
 
   filebrowser:
     image: hurlenko/filebrowser
@@ -16,7 +17,7 @@ services:
     container_name: filebrowser
     volumes:
       - ${HOME}:/data
-      - ./filebrowser_config:/config
+      - ./configs/filebrowser_config:/config
     ports:
       - 8080:8080
     environment:
