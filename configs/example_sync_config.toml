@@ -13,4 +13,3 @@ perform_upload = false
 
 [misc]
 backup_folder = "./backup"
-log_folder = "./logs"
