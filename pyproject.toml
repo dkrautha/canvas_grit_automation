@@ -11,11 +11,11 @@ readme = "README.md"
 packages = [
     { include = "sync" },
     { include = "export_server" },
-    { include = "json_logging" },
+    { include = "jsonl_formatter" },
 ]
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.12"
 polars = "^0.20.7"
 canvasapi = "^3.2.0"
 requests = "^2.31.0"
@@ -27,7 +27,7 @@ bidict = "^0.23.1"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.0.0"
-ruff = "^0.2.1"
+ruff = "^0.3.1"
 
 [tool.poetry.scripts]
 sync = "sync:main"

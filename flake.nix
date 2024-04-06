@@ -35,6 +35,7 @@
           buildInputs = (old.buildInputs or []) ++ [prev.setuptools];
         });
       });
+      python_version = pkgs.python312;
     in {
       packages = {
         dockerImage = pkgs.dockerTools.buildImage {
@@ -48,6 +49,7 @@
         machine_shop = poetry2nix.mkPoetryApplication {
           projectDir = ./.;
           overrides = overrides;
+          python = python_version;
         };
 
         default = machine_shop;
@@ -57,14 +59,22 @@
         env = poetry2nix.mkPoetryEnv {
           projectDir = ./.;
           overrides = overrides;
+          python = python_version;
           editablePackageSources = {
             sync = ./sync;
             export_server = ./export_server;
+            jsonl_formatter = ./jsonl_formatter;
           };
         };
       in
         env.env.overrideAttrs (old: {
-          nativeBuildInputs = (old.nativeBuildInputs or []) ++ [pkgs.poetry pkgs.just pkgs.dive];
+          nativeBuildInputs =
+            (old.nativeBuildInputs or [])
+            ++ [
+              # pkgs.poetry
+              pkgs.just
+              pkgs.dive
+            ];
         });
 
       apps = let
