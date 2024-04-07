@@ -1,3 +1,10 @@
 {
-  "cSpell.words": ["apscheduler", "bidict", "canvasapi", "concatenator", "cwid"]
+  "cSpell.words": [
+    "apscheduler",
+    "bidict",
+    "canvasapi",
+    "concatenator",
+    "cwid",
+    "pydantic"
+  ]
 }
