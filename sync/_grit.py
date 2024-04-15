@@ -40,7 +40,7 @@ class Grit:
             ),
         )
 
-        return self._session.send(request)
+        return self._session.send(request, timeout=20)
 
     def get_backup(self: Self) -> pl.DataFrame:
         request = self._session.prepare_request(
