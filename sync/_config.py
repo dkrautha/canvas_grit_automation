@@ -9,7 +9,9 @@ class CanvasConfig(BaseModel):
     api_url: str
     api_key: str
     course_id: int
-    quizzes: dict[str, int]
+    grit_permission_quizzes: dict[str, int]
+    group_tracking_quizzes: dict[str, int]
+    quiz_id_to_group_id: dict[int, int]
 
 
 class GritConfig(BaseModel):

@@ -1,6 +1,7 @@
 """A logging formatter that outputs logs in jsonl format.
 
-Credit goes to James Murphy of mCoding, this implementation is heavily based on his work.
+Credit goes to James Murphy of mCoding, this implementation
+is heavily based on his work.
 https://github.com/mCodingLLC/VideosSampleCode/blob/master/videos/135_modern_logging/mylogger.py
 """
 
@@ -43,7 +44,7 @@ class JsonlFormatter(logging.Formatter):
 
     fmt_keys: dict[str, str]
 
-    def __init__(self, *, fmt_keys: dict[str, str] | None = None) -> None:
+    def __init__(self: Self, *, fmt_keys: dict[str, str] | None = None) -> None:
         """"""
 
         super().__init__()

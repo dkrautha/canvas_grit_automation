@@ -6,6 +6,9 @@ course_id = 12345
 [canvas.quizzes]
 "pg:Laser Cutter" = 440133
 
+[canvas.quiz_to_group_map]
+440133 = 12345
+
 [grit]
 api_url = "https://url.com"
 api_key = "YOUR_API_KEY"

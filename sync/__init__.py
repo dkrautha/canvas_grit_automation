@@ -13,7 +13,6 @@ from typing import TYPE_CHECKING, Never
 
 import tomllib
 from apscheduler.schedulers.background import BlockingScheduler
-from bidict import bidict
 
 from ._canvas import CanvasSync
 from ._config import Config
@@ -81,12 +80,7 @@ def main() -> None:
     backup_folder = config.misc.backup_folder
 
     grit = Grit(config.grit.api_url, config.grit.api_key)
-    canvas = CanvasSync(
-        config.canvas.api_url,
-        config.canvas.api_key,
-        config.canvas.course_id,
-        bidict(config.canvas.quizzes),
-    )
+    canvas = CanvasSync(config.canvas)
 
     def run() -> None:
         data = canvas.get_passing_results()

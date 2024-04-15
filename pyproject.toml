@@ -34,7 +34,7 @@ sync = "sync:main"
 export = "export_server:export"
 
 [tool.ruff]
-select = ["ALL"]
+lint.select = ["ALL"]
 
 [build-system]
 requires = ["poetry-core"]
