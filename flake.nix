@@ -71,7 +71,7 @@
           nativeBuildInputs =
             (old.nativeBuildInputs or [])
             ++ [
-              # pkgs.poetry
+              pkgs.poetry
               pkgs.just
               pkgs.dive
             ];
