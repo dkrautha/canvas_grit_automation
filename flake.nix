@@ -34,6 +34,9 @@
         canvasapi = prev.canvasapi.overridePythonAttrs (old: {
           buildInputs = (old.buildInputs or []) ++ [prev.setuptools];
         });
+        itsdangerous = prev.itsdangerous.overridePythonAttrs (old: {
+          buildInputs = (old.buildInputs or []) ++ [prev.flit];
+        });
       });
       python_version = pkgs.python312;
     in {
