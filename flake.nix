@@ -19,6 +19,9 @@
     utils,
     ...
   }:
+  # eachDefaultSystem is effectively a copy and paste of the same config multiple times,
+  # with the main difference being the system, which for our purposes includes x86 and arm64 linux.
+  # should allow for users of nix on macos to build there, but I'm not testing it.
     utils.lib.eachDefaultSystem (system: let
       pkgs = nixpkgs.legacyPackages.${system};
       poetry2nix = inputs.poetry2nix.lib.mkPoetry2Nix {inherit pkgs;};

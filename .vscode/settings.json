@@ -8,6 +8,7 @@
     "levelname",
     "levelno",
     "msecs",
+    "pipx",
     "pydantic"
   ]
 }
