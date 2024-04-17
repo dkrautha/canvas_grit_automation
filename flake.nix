@@ -100,6 +100,7 @@
               pkgs.poetry
               pkgs.just
               pkgs.dive
+              pkgs.nodePackages.prettier
             ];
         });
 
