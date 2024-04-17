@@ -37,28 +37,6 @@ def write_timestamped_file(
     data: str,
     concatenator: str = "_",
 ) -> None:
-    """Write the given data to a new file with a timestamped name.
-
-    Args:
-    ----
-        filepath (Path): The path of the file to be written.
-        data (str): The data to be written to the file.
-        concatenator (str, optional): The string to concatenate between the original
-        file name and the timestamp. Defaults to "_".
-
-    Returns:
-    -------
-        None: This function does not return anything.
-
-    Example:
-    -------
-        >>> filepath = Path("example.txt")
-        >>> data = "Hello, world!"
-        >>> write_timestamped_file(filepath, data)
-        Creates a new file named "example_2022_01_01_12_00.txt" with the content
-        "Hello, world!".
-
-    """
     timestamp = datetime.now(timezone.utc).strftime("%Y_%m_%d_%H_%M")
     no_ext = filepath.with_suffix("")
     ext = filepath.suffix
