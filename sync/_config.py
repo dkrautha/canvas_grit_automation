@@ -22,6 +22,7 @@ class GritConfig(BaseModel):
 
 class MiscConfig(BaseModel):
     backup_folder: Path
+    logging_config_file: Path
 
 
 class Config(BaseModel):
