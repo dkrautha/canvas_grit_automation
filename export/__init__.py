@@ -1,20 +1,27 @@
 """"""
 
 import io
+import json
+import logging
+import logging.config
 from pathlib import Path
 
 import polars as pl
-import tomllib
+import tomllib  # TODO: use std library toml
 from flask import Flask, Response, send_file
-from pydantic import BaseModel
+
+from ._config import Config
+
+with Path("configs/export_config.toml").open("rb") as f:
+    export_config = Config.model_validate(tomllib.load(f))
 
 
-class Config(BaseModel):
-    backup_folder: Path
+def setup_logging() -> None:
+    config_file = Path(export_config.misc.logging_config_file)
+    with config_file.open() as f:
+        config = json.load(f)
+    logging.config.dictConfig(config)
 
-
-with Path("configs/export_server_config.toml").open("rb") as f:
-    config = Config.model_validate(tomllib.load(f))
 
 app = Flask(__name__)
 
@@ -22,7 +29,7 @@ app = Flask(__name__)
 @app.route("/grit_export", methods=["GET"])
 def grit_export() -> Response:
     most_recent_file = max(
-        config.backup_folder.iterdir(),
+        export_config.export.backup_folder.iterdir(),
         key=lambda x: x.stat().st_ctime,
         default=None,
     )
@@ -57,6 +64,7 @@ def grit_export() -> Response:
 
 
 def main() -> None:
+    setup_logging()
     app.run(host="0.0.0.0", port=5000)
 
 

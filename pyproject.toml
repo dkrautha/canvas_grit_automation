@@ -10,7 +10,7 @@ license = "MIT"
 readme = "README.md"
 packages = [
     { include = "sync" },
-    { include = "export_server" },
+    { include = "export" },
     { include = "jsonl_formatter" },
 ]
 

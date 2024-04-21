@@ -1,2 +1,4 @@
 sync_logging_config.json
+logging_config.json
 sync_config.toml
+export_config.toml

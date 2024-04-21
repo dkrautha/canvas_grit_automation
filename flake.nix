@@ -87,7 +87,7 @@
           python = python_version;
           editablePackageSources = {
             sync = ./sync;
-            export_server = ./export_server;
+            forward = ./forward;
             jsonl_formatter = ./jsonl_formatter;
           };
         };
