@@ -17,7 +17,7 @@ with Path("configs/export_config.toml").open("rb") as f:
 
 
 def setup_logging() -> None:
-    config_file = Path(export_config.misc.logging_config_file)
+    config_file = Path("configs/export_logging_config.json")
     with config_file.open() as f:
         config = json.load(f)
     logging.config.dictConfig(config)

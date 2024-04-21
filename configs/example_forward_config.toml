@@ -1,5 +1,1 @@
-[forward]
-grit_url = "https://127.0.0.1"
-
-[misc]
-logging_config_file = "./configs/logging_config.json"
+url = "https://127.0.0.1"

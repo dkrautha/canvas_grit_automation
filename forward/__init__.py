@@ -8,21 +8,15 @@ from pathlib import Path
 import requests
 import tomllib
 from flask import Flask, Response, request
-from pydantic import BaseModel
 
-logger = logging.getLogger("sync")
+from ._config import Config
 
-
-class Config(BaseModel):
-    grit_url: str
-
-
-with Path("configs/request_forwarder_config.toml").open("rb") as f:
-    config = Config.model_validate(tomllib.load(f))
+with Path("configs/forward_config.toml").open("rb") as f:
+    forward_config = Config.model_validate(tomllib.load(f))
 
 
 def setup_logging() -> None:
-    config_file = Path("configs/request_forwarder_logging_config.json")
+    config_file = Path("configs/forward_logging_config.json")
     with config_file.open() as f:
         config = json.load(f)
     logging.config.dictConfig(config)
@@ -37,7 +31,7 @@ app = Flask(__name__)
 def redirect_to_grit(path) -> Response:
     res = requests.request(
         method=request.method,
-        url=request.url.replace(request.host_url, f"{config.grit_url}/"),
+        url=request.url.replace(request.host_url, f"{forward_config.forward.url}/"),
         headers={
             k: v for k, v in request.headers if k.lower() != "host"
         },  # exclude 'host' header
@@ -56,11 +50,12 @@ def redirect_to_grit(path) -> Response:
         (k, v) for k, v in res.raw.headers.items() if k.lower() not in excluded_headers
     ]
 
-    return Response(res.content, res.status_code, headers)
+    return Response(res)
 
 
 def main() -> None:
-    app.run(host="0.0.0.0", port=6000)
+    setup_logging()
+    app.run(host="0.0.0.0", port=5000)
 
 
 __all__ = []

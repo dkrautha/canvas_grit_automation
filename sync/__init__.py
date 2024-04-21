@@ -25,11 +25,9 @@ if TYPE_CHECKING:
 with Path("configs/sync_config.toml").open("rb") as f:
     sync_config = Config.model_validate(tomllib.load(f))
 
-logger = logging.getLogger("sync")
-
 
 def setup_logging() -> None:
-    config_file = Path(sync_config.misc.logging_config_file)
+    config_file = Path("configs/sync_logging_config.json")
     with config_file.open() as f:
         config = json.load(f)
     logging.config.dictConfig(config)
@@ -49,6 +47,7 @@ def write_timestamped_file(
 
 def main() -> None:
     setup_logging()
+    logger = logging.getLogger("sync")
 
     upload_to_grit = sync_config.grit.perform_upload
     backup_folder = sync_config.misc.backup_folder
