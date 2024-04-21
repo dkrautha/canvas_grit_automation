@@ -12,6 +12,7 @@ packages = [
     { include = "sync" },
     { include = "export" },
     { include = "jsonl_formatter" },
+    { include = "forward" },
 ]
 
 [tool.poetry.dependencies]

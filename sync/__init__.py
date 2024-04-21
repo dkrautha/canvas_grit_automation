@@ -50,15 +50,15 @@ def main() -> None:
     logger.debug("Loading in config file")
 
     with Path("configs/sync_config.toml").open("rb") as f:
-        config = Config.model_validate(tomllib.load(f))
+        sync_config = Config.model_validate(tomllib.load(f))
 
-    logger.debug("Loaded sync config contents: %s", config)
+    logger.debug("Loaded sync config contents: %s", sync_config)
 
-    upload_to_grit = config.grit.perform_upload
-    backup_folder = config.misc.backup_folder
+    upload_to_grit = sync_config.grit.perform_upload
+    backup_folder = sync_config.misc.backup_folder
 
-    grit = Grit(config.grit.api_url, config.grit.api_key)
-    canvas = CanvasSync(config.canvas)
+    grit = Grit(sync_config.grit.api_url, sync_config.grit.api_key)
+    canvas = CanvasSync(sync_config.canvas)
 
     def run() -> None:
         data = canvas.get_passing_results()

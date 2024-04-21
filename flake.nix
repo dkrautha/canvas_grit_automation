@@ -88,6 +88,7 @@
           editablePackageSources = {
             sync = ./sync;
             forward = ./forward;
+            export = ./export;
             jsonl_formatter = ./jsonl_formatter;
           };
         };
@@ -115,6 +116,10 @@
         export = {
           type = "app";
           program = "${machine_shop}/bin/export";
+        };
+        forward = {
+          type = "app";
+          program = "${machine_shop}/bin/forward";
         };
         sync = sync;
         default = sync;
