@@ -29,7 +29,7 @@ app = Flask(__name__)
 @app.route("/grit_export", methods=["GET"])
 def grit_export() -> Response:
     most_recent_file = max(
-        export_config.export.backup_folder.iterdir(),
+        export_config.backup_folder.iterdir(),
         key=lambda x: x.stat().st_ctime,
         default=None,
     )

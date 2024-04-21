@@ -31,7 +31,7 @@ app = Flask(__name__)
 def redirect_to_grit(path) -> Response:
     res = requests.request(
         method=request.method,
-        url=request.url.replace(request.host_url, f"{forward_config.forward.url}/"),
+        url=request.url.replace(request.host_url, f"{forward_config.url}/"),
         headers={
             k: v for k, v in request.headers if k.lower() != "host"
         },  # exclude 'host' header
