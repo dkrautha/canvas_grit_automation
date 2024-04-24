@@ -20,10 +20,11 @@ after a rebuild of nix it will be installed.
 
 ## Nix
 
-Nix is the primary build system for the project. It is capable of reading in the
-poetry.lock file, sourcing the correct packages, and building a development
-environment and source distribution. It is also capable of building a docker
-image, which is the primary means for running the Sync application.
+Nix is the primary build system for the project. A special flake modules is
+being use to read in the poetry.lock file, source the correct packages, and
+build a development environment and source distribution. It is also capable of
+building a docker image, which is the primary means for running the Sync
+application.
 
 The flake.nix file defines how the project itself is built, and you should
 mostly not need to touch it at all.
