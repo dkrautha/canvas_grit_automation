@@ -5,10 +5,12 @@
     "canvasapi",
     "concatenator",
     "cwid",
+    "dataframe",
     "levelname",
     "levelno",
     "msecs",
     "pipx",
-    "pydantic"
+    "pydantic",
+    "upserted"
   ]
 }
