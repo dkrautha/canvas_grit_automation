@@ -51,7 +51,7 @@ class Grit:
             ),
         )
 
-        response = self._session.send(request)
+        response = self._session.send(request, timeout=20)
         content = io.BytesIO(response.content)
         return pl.read_excel(content)
 
