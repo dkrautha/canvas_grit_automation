@@ -26,7 +26,6 @@ class CanvasSync:
     _quiz_id_to_group_id: dict[int, Group]
     _initialize_time = datetime.now(timezone.utc)
 
-    # canvas config as param?
     def __init__(
         self: Self,
         config: CanvasConfig,
