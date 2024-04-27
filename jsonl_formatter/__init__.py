@@ -40,18 +40,45 @@ LOG_RECORD_BUILTIN_ATTRS = {
 
 
 class JsonlFormatter(logging.Formatter):
-    """"""
+    """A logging formatter that outputs logs in jsonl format.
+
+    The formatter takes a dict of str to str, which maps output field
+    names to attribute names on the LogRecord. If an attribute is not
+    found on the LogRecord, the LogRecord's __dict__ is checked for a
+    matching key. The builtin attributes from the LogRecord are not
+    included in the output.
+
+    The fields always included in the output are the message, timestamp,
+    and exc_info (if present).
+    """
 
     fmt_keys: dict[str, str]
 
     def __init__(self: Self, *, fmt_keys: dict[str, str] | None = None) -> None:
-        """"""
+        """Initialize the formatter.
 
+        Args:
+        ----
+            fmt_keys: A dict mapping output field names to LogRecord
+                attribute names. If not provided, an empty dict is used.
+
+        """
         super().__init__()
         self.fmt_keys = fmt_keys or {}
 
     @override
     def format(self: Self, record: logging.LogRecord) -> str:
+        """Format a LogRecord into a jsonl string.
+
+        Args:
+        ----
+            record: The LogRecord to format.
+
+        Returns:
+        -------
+            A jsonl string representing the LogRecord.
+
+        """
         message = self._prepare_log_dict(record)
         return json.dumps(message, default=str)
 
@@ -83,3 +110,6 @@ class JsonlFormatter(logging.Formatter):
                 message[key] = val
 
         return message
+
+
+__all__ = ["JsonlFormatter"]
