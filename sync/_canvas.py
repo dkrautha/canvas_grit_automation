@@ -113,14 +113,14 @@ class CanvasSync:
                 passing = passing.vstack(row)
 
             # to be enabled once proper groups have been created
-            # if (group := self._quiz_id_to_group_id.get(quiz_id)) is not None:
-            #     logger.debug(
-            #         "Adding %s %s to group %s",
-            #         first_name,
-            #         last_name,
-            #         group.name,
-            #     )
-            #     group.create_membership(student)
+            if (group := self._quiz_id_to_group_id.get(quiz_id)) is not None:
+                logger.debug(
+                    "Adding %s %s to group %s",
+                    first_name,
+                    last_name,
+                    group.name,
+                )
+                group.create_membership(student)
 
         logger.info("Processed submissions from Canvas")
 
