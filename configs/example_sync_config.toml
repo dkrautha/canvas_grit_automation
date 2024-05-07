@@ -3,10 +3,13 @@ api_url = "https://canvas.instructure.com"
 api_key = "YOUR_API_KEY"
 course_id = 12345
 
-[canvas.quizzes]
+[canvas.grit_permission_quizzes]
 "pg:Laser Cutter" = 440133
 
-[canvas.quiz_to_group_map]
+[canvas.group_tracking_quizzes]
+"3D Printers" = 440132
+
+[canvas.quiz_id_to_group_id]
 440133 = 12345
 
 [grit]
