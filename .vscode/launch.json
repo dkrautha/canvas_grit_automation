@@ -17,13 +17,6 @@
       "request": "launch",
       "module": "export",
       "justMyCode": false
-    },
-    {
-      "name": "Debug Forward",
-      "type": "debugpy",
-      "request": "launch",
-      "module": "forward",
-      "justMyCode": false
     }
   ]
 }
