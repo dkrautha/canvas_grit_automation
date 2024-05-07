@@ -8,11 +8,7 @@ authors = [
 ]
 license = "MIT"
 readme = "README.md"
-packages = [
-    { include = "sync" },
-    { include = "export" },
-    { include = "jsonl_formatter" },
-]
+packages = [{ include = "sync" }, { include = "jsonl_formatter" }]
 
 [tool.poetry.dependencies]
 python = "^3.12"
@@ -31,7 +27,6 @@ ruff = "^0.3.1"
 
 [tool.poetry.scripts]
 sync = "sync:main"
-export = "export_server:export"
 
 [tool.ruff]
 lint.select = ["ALL"]

@@ -87,7 +87,6 @@
           python = python_version;
           editablePackageSources = {
             sync = ./sync;
-            export = ./export;
             jsonl_formatter = ./jsonl_formatter;
           };
         };
@@ -112,10 +111,6 @@
           program = sync_cmd;
         };
       in {
-        export = {
-          type = "app";
-          program = "${machine_shop}/bin/export";
-        };
         sync = sync;
         default = sync;
       };

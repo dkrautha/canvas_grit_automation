@@ -10,13 +10,6 @@
       "request": "launch",
       "module": "sync",
       "justMyCode": false
-    },
-    {
-      "name": "Debug Export",
-      "type": "debugpy",
-      "request": "launch",
-      "module": "export",
-      "justMyCode": false
     }
   ]
 }
