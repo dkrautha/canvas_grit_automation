@@ -105,13 +105,11 @@
 
       # defines applications that could be ran with nix run
       # currently goes unused, but is in interesting exercise in how you'd do it
-      apps = let
+      apps = rec {
         sync = {
           type = "app";
           program = sync_cmd;
         };
-      in {
-        sync = sync;
         default = sync;
       };
     });
