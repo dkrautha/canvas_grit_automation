@@ -10,7 +10,7 @@ course_id = 12345
 "3D Printers" = 440132
 
 [canvas.quiz_id_to_group_id]
-440133 = 12345
+440133 = 93361
 
 [grit]
 api_url = "https://url.com"
