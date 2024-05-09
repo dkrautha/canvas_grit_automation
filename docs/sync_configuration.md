@@ -20,6 +20,12 @@
     - [Finding Quiz Ids](#finding-quiz-ids-2)
     - [Finding Group Ids.](#finding-group-ids)
     - [Putting It Together](#putting-it-together-2)
+  - [`[grit]`](#grit)
+    - [`api_url`](#api_url-1)
+    - [`api_key`](#api_key-1)
+    - [`perform_upload`](#perform_upload)
+  - [`[misc]`](#misc)
+
 ## Location
 
 The location of the Sync config file is in `configs/sync_config.toml`. You can
@@ -196,3 +202,56 @@ Using the Laser Cutter Group as an example, its group id is 93361.
 440133 = 93361
 ```
 
+## `[grit]`
+
+Here is where to place the URL of the Grit instance, your API key, and toggle
+the uploading new users to Grit feature.
+
+### `api_url`
+
+The URL for Grit is the same as what you use when connecting to Grit with a
+browser. In the case of Stevens it is an IP address.
+
+```toml
+[grit]
+api_url = "https://192.168.69.69"
+```
+
+### `api_key`
+
+Your API key can be obtained through the Grit interface in the browser. The
+following are the necessary steps:
+
+1. Login to Grit.
+2. Go to the admin page. ![Grit Admin Page](./images/grit_admin_button.png)
+3. Click the three bars in the top right, and a menu should appear on the right.
+4. Click Remote Access. ![Grit Remote Access](./images/grit_remote_access.png)
+5. Click the plus button in the top right
+   ![Grit New Token](./images/grit_new_token_button.png)
+6. Switch to API token if necessary, then fill out the fields. An expiration
+   date is optional. ![Grit Token Input](./images/grit_new_token_dialog.png)
+7. Click Save, then click the eye icon next to the new key in the list. It'll
+   look something like this: ![Grit API Token](./images/grit_token.png)
+
+Be extremely careful with this key, as if somebody else gets ahold of it they
+can have effectively unlimited admin access to Grit. Paste this key inside of
+the double quotes on the `api_key` entry.
+
+```toml
+[grit]
+api_key = "YOUR_API_KEY"
+```
+
+### `perform_upload`
+
+This settings controls whether Sync will actually attempt to perform a sync with
+Grit. This is mainly an option that was used for debugging purposes, but it
+could be useful as an emergency off button if it is changed to false and the
+service is restarted.
+
+## `[misc]`
+
+Here is where miscellaneous configuration goes. At the time of writing this
+documentation the only thing present here is where the folder for Grit backups
+should be placed. Unless you have a really good reason to change it, leave it at
+what it is in the example config file.
