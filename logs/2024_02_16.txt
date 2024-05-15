@@ -1,0 +1,282 @@
+Starting at 2024-02-16 17:26:21.427530
+
+received submission pg:Drill Press 20024223 Arthur Serra 91.67 aserra1@stevens.edu
+received submission pg:Band Saw 20024223 Arthur Serra 100.0 aserra1@stevens.edu
+received submission pg:Drill Press 10462154 Thomas Roff 91.67 troff@stevens.edu
+received submission pg:Band Saw 10462154 Thomas Roff 100.0 troff@stevens.edu
+received submission pg:Laser Cutter 10462154 Thomas Roff 90.91 troff@stevens.edu
+received submission pg:Band Saw 10464071 Aashutosh Kulakarni Prachet 100.0 akulakar@stevens.edu
+received submission pg:Drill Press 10463920 Erin Wolf 100.0 ewolf1@stevens.edu
+received submission pg:Band Saw 10463920 Erin Wolf 100.0 ewolf1@stevens.edu
+received submission pg:Drill Press 20025055 Aidan Berard 91.67 aberard@stevens.edu
+received submission pg:Band Saw 20025055 Aidan Berard 90.0 aberard@stevens.edu
+received submission pg:Laser Cutter 20025055 Aidan Berard 90.91 aberard@stevens.edu
+received submission pg:Laser Cutter 20023517 Gavin Tan-Torres 100.0 gtantorr@stevens.edu
+received submission pg:Drill Press 10458397 Carver Weirick 100.0 cweirick@stevens.edu
+received submission pg:Band Saw 10458397 Carver Weirick 100.0 cweirick@stevens.edu
+received submission pg:Laser Cutter 10458397 Carver Weirick 100.0 cweirick@stevens.edu
+received submission pg:Electronics Bench 10462154 Thomas Roff 100.0 troff@stevens.edu
+received submission pg:Electronics Bench 10458397 Carver Weirick 100.0 cweirick@stevens.edu
+received submission pg:Electronics Bench 20024691 Mehmet Bertan Tarakcioglu 93.33 mtarakci@stevens.edu
+received submission pg:Electronics Bench 20024140 Chloe Talty 100.0 ltalty@stevens.edu
+received submission pg:Electronics Bench 20024223 Arthur Serra 91.11 aserra1@stevens.edu
+received submission pg:Electronics Bench 20023508 Adrien Susino 100.0 asusino@stevens.edu
+received submission pg:Electronics Bench 20023517 Gavin Tan-Torres 100.0 gtantorr@stevens.edu
+received submission pg:Electronics Bench 20025055 Aidan Berard 100.0 aberard@stevens.edu
+received submission pg:Laser Cutter 10447501 James Morris 90.91 jmorris3@stevens.edu
+received submission pg:Electronics Bench 20020066 Noah Spencer 100.0 nspencer@stevens.edu
+received submission pg:Laser Cutter 10465505 Tyler Zellner 90.91 tzellner@stevens.edu
+received submission pg:Band Saw 10470405 Thomas Wohlbruck 100.0 twohlbru@stevens.edu
+received submission pg:Band Saw 20006341 Ryan Musantry 100.0 rmusantr@stevens.edu
+received submission pg:Drill Press 10446746 Christopher Pescatore 91.67 cpescat1@stevens.edu
+received submission pg:Band Saw 10446746 Christopher Pescatore 90.0 cpescat1@stevens.edu
+received submission pg:Drill Press 10466206 Nicholas Lang 91.67 nlang@stevens.edu
+received submission pg:Band Saw 10466206 Nicholas Lang 90.0 nlang@stevens.edu
+received submission pg:Band Saw 20006226 Logan Hickey 100.0 lhickey@stevens.edu
+received submission pg:Electronics Bench 20013769 Evan Papageorge 93.33 epapageo@stevens.edu
+received submission pg:Electronics Bench 20015870 Nicholas Herrmann 93.33 nherrman@stevens.edu
+received submission pg:Band Saw 20006544 Cole Spitzner 100.0 nspitzne@stevens.edu
+received submission pg:Band Saw 20014821 Cooper Kinsley 100.0 ckinsley@stevens.edu
+received submission pg:Band Saw 10463054 Konnor Getz 100.0 kgetz@stevens.edu
+received submission pg:Laser Cutter 20006635 Michael Moonan 100.0 mmoonan@stevens.edu
+received submission pg:Electronics Bench 10445129 Daniel Goldberg 100.0 dgoldbe2@stevens.edu
+received submission pg:Electronics Bench 10444874 PAUL GOMEZ 100.0 pgomez@stevens.edu
+received submission pg:Drill Press 10458175 Alexander Marsh 100.0 amarsh1@stevens.edu
+received submission pg:Band Saw 10458175 Alexander Marsh 100.0 amarsh1@stevens.edu
+received submission pg:Laser Cutter 10458175 Alexander Marsh 90.91 amarsh1@stevens.edu
+received submission pg:Electronics Bench 10458175 Alexander Marsh 100.0 amarsh1@stevens.edu
+received submission pg:Band Saw 20024146 Francisco Arroyo 90.0 farroyoc@stevens.edu
+received submission pg:Drill Press 20024162 Elizabeth Knerr 91.67 eknerr@stevens.edu
+received submission pg:Band Saw 20024162 Elizabeth Knerr 100.0 eknerr@stevens.edu
+received submission pg:Laser Cutter 20024162 Elizabeth Knerr 90.91 eknerr@stevens.edu
+received submission pg:Electronics Bench 20024162 Elizabeth Knerr 93.33 eknerr@stevens.edu
+received submission pg:Drill Press 20023495 Cesar Martinez Flores 91.67 cmartine1@stevens.edu
+received submission pg:Band Saw 20023495 Cesar Martinez Flores 100.0 cmartine1@stevens.edu
+received submission pg:Laser Cutter 20023495 Cesar Martinez Flores 90.91 cmartine1@stevens.edu
+CSV to send:
+firstName,lastName,externalId,email,pg:Laser Cutter,pg:Band Saw,pg:Drill Press,pg:Electronics Bench,at:Any Time,active
+Chloe,Talty,20024140,ltalty@stevens.edu,,,,x,x,x
+Nicholas,Lang,10466206,nlang@stevens.edu,,x,x,,x,x
+Thomas,Roff,10462154,troff@stevens.edu,x,x,x,x,x,x
+James,Morris,10447501,jmorris3@stevens.edu,x,,,,x,x
+Christopher,Pescatore,10446746,cpescat1@stevens.edu,,x,x,,x,x
+Francisco,Arroyo,20024146,farroyoc@stevens.edu,,x,,,x,x
+Gavin,Tan-Torres,20023517,gtantorr@stevens.edu,x,,,x,x,x
+Tyler,Zellner,10465505,tzellner@stevens.edu,x,,,,x,x
+Thomas,Wohlbruck,10470405,twohlbru@stevens.edu,,x,,,x,x
+Cole,Spitzner,20006544,nspitzne@stevens.edu,,x,,,x,x
+Nicholas,Herrmann,20015870,nherrman@stevens.edu,,,,x,x,x
+Cesar,Martinez Flores,20023495,cmartine1@stevens.edu,x,x,x,,x,x
+Mehmet Bertan,Tarakcioglu,20024691,mtarakci@stevens.edu,,,,x,x,x
+Noah,Spencer,20020066,nspencer@stevens.edu,,,,x,x,x
+Carver,Weirick,10458397,cweirick@stevens.edu,x,x,x,x,x,x
+Logan,Hickey,20006226,lhickey@stevens.edu,,x,,,x,x
+Michael,Moonan,20006635,mmoonan@stevens.edu,x,,,,x,x
+PAUL,GOMEZ,10444874,pgomez@stevens.edu,,,,x,x,x
+Alexander,Marsh,10458175,amarsh1@stevens.edu,x,x,x,x,x,x
+Elizabeth,Knerr,20024162,eknerr@stevens.edu,x,x,x,x,x,x
+Erin,Wolf,10463920,ewolf1@stevens.edu,,x,x,,x,x
+Evan,Papageorge,20013769,epapageo@stevens.edu,,,,x,x,x
+Konnor,Getz,10463054,kgetz@stevens.edu,,x,,,x,x
+Aashutosh,Kulakarni Prachet,10464071,akulakar@stevens.edu,,x,,,x,x
+Adrien,Susino,20023508,asusino@stevens.edu,,,,x,x,x
+Cooper,Kinsley,20014821,ckinsley@stevens.edu,,x,,,x,x
+Daniel,Goldberg,10445129,dgoldbe2@stevens.edu,,,,x,x,x
+Arthur,Serra,20024223,aserra1@stevens.edu,,x,x,x,x,x
+Aidan,Berard,20025055,aberard@stevens.edu,x,x,x,x,x,x
+Ryan,Musantry,20006341,rmusantr@stevens.edu,,x,,,x,x
+
+Completed in 7.21 seconds
+Pulling new backup from Grit now
+Starting at 2024-02-16 17:27:19.036102
+
+received submission pg:Drill Press 20024223 Arthur Serra 91.67 aserra1@stevens.edu
+received submission pg:Band Saw 20024223 Arthur Serra 100.0 aserra1@stevens.edu
+received submission pg:Drill Press 10462154 Thomas Roff 91.67 troff@stevens.edu
+received submission pg:Band Saw 10462154 Thomas Roff 100.0 troff@stevens.edu
+received submission pg:Laser Cutter 10462154 Thomas Roff 90.91 troff@stevens.edu
+received submission pg:Band Saw 10464071 Aashutosh Kulakarni Prachet 100.0 akulakar@stevens.edu
+received submission pg:Drill Press 10463920 Erin Wolf 100.0 ewolf1@stevens.edu
+received submission pg:Band Saw 10463920 Erin Wolf 100.0 ewolf1@stevens.edu
+received submission pg:Drill Press 20025055 Aidan Berard 91.67 aberard@stevens.edu
+received submission pg:Band Saw 20025055 Aidan Berard 90.0 aberard@stevens.edu
+received submission pg:Laser Cutter 20025055 Aidan Berard 90.91 aberard@stevens.edu
+received submission pg:Laser Cutter 20023517 Gavin Tan-Torres 100.0 gtantorr@stevens.edu
+received submission pg:Drill Press 10458397 Carver Weirick 100.0 cweirick@stevens.edu
+received submission pg:Band Saw 10458397 Carver Weirick 100.0 cweirick@stevens.edu
+received submission pg:Laser Cutter 10458397 Carver Weirick 100.0 cweirick@stevens.edu
+received submission pg:Electronics Bench 10462154 Thomas Roff 100.0 troff@stevens.edu
+received submission pg:Electronics Bench 10458397 Carver Weirick 100.0 cweirick@stevens.edu
+received submission pg:Electronics Bench 20024691 Mehmet Bertan Tarakcioglu 93.33 mtarakci@stevens.edu
+received submission pg:Electronics Bench 20024140 Chloe Talty 100.0 ltalty@stevens.edu
+received submission pg:Electronics Bench 20024223 Arthur Serra 91.11 aserra1@stevens.edu
+received submission pg:Electronics Bench 20023508 Adrien Susino 100.0 asusino@stevens.edu
+received submission pg:Electronics Bench 20023517 Gavin Tan-Torres 100.0 gtantorr@stevens.edu
+received submission pg:Electronics Bench 20025055 Aidan Berard 100.0 aberard@stevens.edu
+received submission pg:Laser Cutter 10447501 James Morris 90.91 jmorris3@stevens.edu
+received submission pg:Electronics Bench 20020066 Noah Spencer 100.0 nspencer@stevens.edu
+received submission pg:Laser Cutter 10465505 Tyler Zellner 90.91 tzellner@stevens.edu
+received submission pg:Band Saw 10470405 Thomas Wohlbruck 100.0 twohlbru@stevens.edu
+received submission pg:Band Saw 20006341 Ryan Musantry 100.0 rmusantr@stevens.edu
+received submission pg:Drill Press 10446746 Christopher Pescatore 91.67 cpescat1@stevens.edu
+received submission pg:Band Saw 10446746 Christopher Pescatore 90.0 cpescat1@stevens.edu
+received submission pg:Drill Press 10466206 Nicholas Lang 91.67 nlang@stevens.edu
+received submission pg:Band Saw 10466206 Nicholas Lang 90.0 nlang@stevens.edu
+received submission pg:Band Saw 20006226 Logan Hickey 100.0 lhickey@stevens.edu
+received submission pg:Electronics Bench 20013769 Evan Papageorge 93.33 epapageo@stevens.edu
+received submission pg:Electronics Bench 20015870 Nicholas Herrmann 93.33 nherrman@stevens.edu
+received submission pg:Band Saw 20006544 Cole Spitzner 100.0 nspitzne@stevens.edu
+received submission pg:Band Saw 20014821 Cooper Kinsley 100.0 ckinsley@stevens.edu
+received submission pg:Band Saw 10463054 Konnor Getz 100.0 kgetz@stevens.edu
+received submission pg:Laser Cutter 20006635 Michael Moonan 100.0 mmoonan@stevens.edu
+received submission pg:Electronics Bench 10445129 Daniel Goldberg 100.0 dgoldbe2@stevens.edu
+received submission pg:Electronics Bench 10444874 PAUL GOMEZ 100.0 pgomez@stevens.edu
+received submission pg:Drill Press 10458175 Alexander Marsh 100.0 amarsh1@stevens.edu
+received submission pg:Band Saw 10458175 Alexander Marsh 100.0 amarsh1@stevens.edu
+received submission pg:Laser Cutter 10458175 Alexander Marsh 90.91 amarsh1@stevens.edu
+received submission pg:Electronics Bench 10458175 Alexander Marsh 100.0 amarsh1@stevens.edu
+received submission pg:Band Saw 20024146 Francisco Arroyo 90.0 farroyoc@stevens.edu
+received submission pg:Drill Press 20024162 Elizabeth Knerr 91.67 eknerr@stevens.edu
+received submission pg:Band Saw 20024162 Elizabeth Knerr 100.0 eknerr@stevens.edu
+received submission pg:Laser Cutter 20024162 Elizabeth Knerr 90.91 eknerr@stevens.edu
+received submission pg:Electronics Bench 20024162 Elizabeth Knerr 93.33 eknerr@stevens.edu
+received submission pg:Drill Press 20023495 Cesar Martinez Flores 91.67 cmartine1@stevens.edu
+received submission pg:Band Saw 20023495 Cesar Martinez Flores 100.0 cmartine1@stevens.edu
+received submission pg:Laser Cutter 20023495 Cesar Martinez Flores 90.91 cmartine1@stevens.edu
+CSV to send:
+firstName,lastName,externalId,email,pg:Laser Cutter,pg:Band Saw,pg:Drill Press,pg:Electronics Bench,at:Any Time,active
+Aidan,Berard,20025055,aberard@stevens.edu,x,x,x,x,x,x
+Logan,Hickey,20006226,lhickey@stevens.edu,,x,,,x,x
+Michael,Moonan,20006635,mmoonan@stevens.edu,x,,,,x,x
+Francisco,Arroyo,20024146,farroyoc@stevens.edu,,x,,,x,x
+Nicholas,Herrmann,20015870,nherrman@stevens.edu,,,,x,x,x
+Thomas,Wohlbruck,10470405,twohlbru@stevens.edu,,x,,,x,x
+PAUL,GOMEZ,10444874,pgomez@stevens.edu,,,,x,x,x
+Thomas,Roff,10462154,troff@stevens.edu,x,x,x,x,x,x
+Mehmet Bertan,Tarakcioglu,20024691,mtarakci@stevens.edu,,,,x,x,x
+Cooper,Kinsley,20014821,ckinsley@stevens.edu,,x,,,x,x
+Gavin,Tan-Torres,20023517,gtantorr@stevens.edu,x,,,x,x,x
+Evan,Papageorge,20013769,epapageo@stevens.edu,,,,x,x,x
+Cesar,Martinez Flores,20023495,cmartine1@stevens.edu,x,x,x,,x,x
+Elizabeth,Knerr,20024162,eknerr@stevens.edu,x,x,x,x,x,x
+Chloe,Talty,20024140,ltalty@stevens.edu,,,,x,x,x
+James,Morris,10447501,jmorris3@stevens.edu,x,,,,x,x
+Christopher,Pescatore,10446746,cpescat1@stevens.edu,,x,x,,x,x
+Nicholas,Lang,10466206,nlang@stevens.edu,,x,x,,x,x
+Cole,Spitzner,20006544,nspitzne@stevens.edu,,x,,,x,x
+Daniel,Goldberg,10445129,dgoldbe2@stevens.edu,,,,x,x,x
+Carver,Weirick,10458397,cweirick@stevens.edu,x,x,x,x,x,x
+Arthur,Serra,20024223,aserra1@stevens.edu,,x,x,x,x,x
+Noah,Spencer,20020066,nspencer@stevens.edu,,,,x,x,x
+Konnor,Getz,10463054,kgetz@stevens.edu,,x,,,x,x
+Erin,Wolf,10463920,ewolf1@stevens.edu,,x,x,,x,x
+Aashutosh,Kulakarni Prachet,10464071,akulakar@stevens.edu,,x,,,x,x
+Adrien,Susino,20023508,asusino@stevens.edu,,,,x,x,x
+Ryan,Musantry,20006341,rmusantr@stevens.edu,,x,,,x,x
+Tyler,Zellner,10465505,tzellner@stevens.edu,x,,,,x,x
+Alexander,Marsh,10458175,amarsh1@stevens.edu,x,x,x,x,x,x
+
+Completed in 7.06 seconds
+Pulling new backup from Grit now
+Starting at 2024-02-16 17:29:25.865238
+
+received submission pg:Drill Press 20024223 Arthur Serra 91.67 aserra1@stevens.edu
+received submission pg:Band Saw 20024223 Arthur Serra 100.0 aserra1@stevens.edu
+received submission pg:Drill Press 10462154 Thomas Roff 91.67 troff@stevens.edu
+received submission pg:Band Saw 10462154 Thomas Roff 100.0 troff@stevens.edu
+received submission pg:Laser Cutter 10462154 Thomas Roff 90.91 troff@stevens.edu
+received submission pg:Band Saw 10464071 Aashutosh Kulakarni Prachet 100.0 akulakar@stevens.edu
+received submission pg:Drill Press 10463920 Erin Wolf 100.0 ewolf1@stevens.edu
+received submission pg:Band Saw 10463920 Erin Wolf 100.0 ewolf1@stevens.edu
+received submission pg:Drill Press 20025055 Aidan Berard 91.67 aberard@stevens.edu
+received submission pg:Band Saw 20025055 Aidan Berard 90.0 aberard@stevens.edu
+received submission pg:Laser Cutter 20025055 Aidan Berard 90.91 aberard@stevens.edu
+received submission pg:Laser Cutter 20023517 Gavin Tan-Torres 100.0 gtantorr@stevens.edu
+received submission pg:Drill Press 10458397 Carver Weirick 100.0 cweirick@stevens.edu
+received submission pg:Band Saw 10458397 Carver Weirick 100.0 cweirick@stevens.edu
+received submission pg:Laser Cutter 10458397 Carver Weirick 100.0 cweirick@stevens.edu
+received submission pg:Electronics Bench 10462154 Thomas Roff 100.0 troff@stevens.edu
+received submission pg:Electronics Bench 10458397 Carver Weirick 100.0 cweirick@stevens.edu
+received submission pg:Electronics Bench 20024691 Mehmet Bertan Tarakcioglu 93.33 mtarakci@stevens.edu
+received submission pg:Electronics Bench 20024140 Chloe Talty 100.0 ltalty@stevens.edu
+received submission pg:Electronics Bench 20024223 Arthur Serra 91.11 aserra1@stevens.edu
+received submission pg:Electronics Bench 20023508 Adrien Susino 100.0 asusino@stevens.edu
+received submission pg:Electronics Bench 20023517 Gavin Tan-Torres 100.0 gtantorr@stevens.edu
+received submission pg:Electronics Bench 20025055 Aidan Berard 100.0 aberard@stevens.edu
+received submission pg:Laser Cutter 10447501 James Morris 90.91 jmorris3@stevens.edu
+received submission pg:Electronics Bench 20020066 Noah Spencer 100.0 nspencer@stevens.edu
+received submission pg:Laser Cutter 10465505 Tyler Zellner 90.91 tzellner@stevens.edu
+received submission pg:Band Saw 10470405 Thomas Wohlbruck 100.0 twohlbru@stevens.edu
+received submission pg:Band Saw 20006341 Ryan Musantry 100.0 rmusantr@stevens.edu
+received submission pg:Drill Press 10446746 Christopher Pescatore 91.67 cpescat1@stevens.edu
+received submission pg:Band Saw 10446746 Christopher Pescatore 90.0 cpescat1@stevens.edu
+received submission pg:Drill Press 10466206 Nicholas Lang 91.67 nlang@stevens.edu
+received submission pg:Band Saw 10466206 Nicholas Lang 90.0 nlang@stevens.edu
+received submission pg:Band Saw 20006226 Logan Hickey 100.0 lhickey@stevens.edu
+received submission pg:Electronics Bench 20013769 Evan Papageorge 93.33 epapageo@stevens.edu
+received submission pg:Electronics Bench 20015870 Nicholas Herrmann 93.33 nherrman@stevens.edu
+received submission pg:Band Saw 20006544 Cole Spitzner 100.0 nspitzne@stevens.edu
+received submission pg:Band Saw 20014821 Cooper Kinsley 100.0 ckinsley@stevens.edu
+received submission pg:Band Saw 10463054 Konnor Getz 100.0 kgetz@stevens.edu
+received submission pg:Laser Cutter 20006635 Michael Moonan 100.0 mmoonan@stevens.edu
+received submission pg:Electronics Bench 10445129 Daniel Goldberg 100.0 dgoldbe2@stevens.edu
+received submission pg:Electronics Bench 10444874 PAUL GOMEZ 100.0 pgomez@stevens.edu
+received submission pg:Drill Press 10458175 Alexander Marsh 100.0 amarsh1@stevens.edu
+received submission pg:Band Saw 10458175 Alexander Marsh 100.0 amarsh1@stevens.edu
+received submission pg:Laser Cutter 10458175 Alexander Marsh 90.91 amarsh1@stevens.edu
+received submission pg:Electronics Bench 10458175 Alexander Marsh 100.0 amarsh1@stevens.edu
+received submission pg:Band Saw 20024146 Francisco Arroyo 90.0 farroyoc@stevens.edu
+received submission pg:Drill Press 20024162 Elizabeth Knerr 91.67 eknerr@stevens.edu
+received submission pg:Band Saw 20024162 Elizabeth Knerr 100.0 eknerr@stevens.edu
+received submission pg:Laser Cutter 20024162 Elizabeth Knerr 90.91 eknerr@stevens.edu
+received submission pg:Electronics Bench 20024162 Elizabeth Knerr 93.33 eknerr@stevens.edu
+received submission pg:Drill Press 20023495 Cesar Martinez Flores 91.67 cmartine1@stevens.edu
+received submission pg:Band Saw 20023495 Cesar Martinez Flores 100.0 cmartine1@stevens.edu
+received submission pg:Laser Cutter 20023495 Cesar Martinez Flores 90.91 cmartine1@stevens.edu
+CSV to send:
+firstName,lastName,externalId,email,pg:Laser Cutter,pg:Band Saw,pg:Drill Press,pg:Electronics Bench,at:Any Time,active
+Nicholas,Herrmann,20015870,nherrman@stevens.edu,,,,x,x,x
+Gavin,Tan-Torres,20023517,gtantorr@stevens.edu,x,,,x,x,x
+Christopher,Pescatore,10446746,cpescat1@stevens.edu,,x,x,,x,x
+Arthur,Serra,20024223,aserra1@stevens.edu,,x,x,x,x,x
+Mehmet Bertan,Tarakcioglu,20024691,mtarakci@stevens.edu,,,,x,x,x
+Tyler,Zellner,10465505,tzellner@stevens.edu,x,,,,x,x
+Elizabeth,Knerr,20024162,eknerr@stevens.edu,x,x,x,x,x,x
+Noah,Spencer,20020066,nspencer@stevens.edu,,,,x,x,x
+Nicholas,Lang,10466206,nlang@stevens.edu,,x,x,,x,x
+Chloe,Talty,20024140,ltalty@stevens.edu,,,,x,x,x
+Evan,Papageorge,20013769,epapageo@stevens.edu,,,,x,x,x
+Cole,Spitzner,20006544,nspitzne@stevens.edu,,x,,,x,x
+PAUL,GOMEZ,10444874,pgomez@stevens.edu,,,,x,x,x
+Alexander,Marsh,10458175,amarsh1@stevens.edu,x,x,x,x,x,x
+Adrien,Susino,20023508,asusino@stevens.edu,,,,x,x,x
+Thomas,Roff,10462154,troff@stevens.edu,x,x,x,x,x,x
+Daniel,Goldberg,10445129,dgoldbe2@stevens.edu,,,,x,x,x
+Carver,Weirick,10458397,cweirick@stevens.edu,x,x,x,x,x,x
+Cooper,Kinsley,20014821,ckinsley@stevens.edu,,x,,,x,x
+Konnor,Getz,10463054,kgetz@stevens.edu,,x,,,x,x
+Aashutosh,Kulakarni Prachet,10464071,akulakar@stevens.edu,,x,,,x,x
+Aidan,Berard,20025055,aberard@stevens.edu,x,x,x,x,x,x
+Erin,Wolf,10463920,ewolf1@stevens.edu,,x,x,,x,x
+Michael,Moonan,20006635,mmoonan@stevens.edu,x,,,,x,x
+Francisco,Arroyo,20024146,farroyoc@stevens.edu,,x,,,x,x
+Ryan,Musantry,20006341,rmusantr@stevens.edu,,x,,,x,x
+Logan,Hickey,20006226,lhickey@stevens.edu,,x,,,x,x
+James,Morris,10447501,jmorris3@stevens.edu,x,,,,x,x
+Thomas,Wohlbruck,10470405,twohlbru@stevens.edu,,x,,,x,x
+Cesar,Martinez Flores,20023495,cmartine1@stevens.edu,x,x,x,,x,x
+
+Completed in 6.86 seconds
+Pulling new backup from Grit now
+Starting at 2024-02-16 17:29:45.917162
+
+received submission pg:Drill Press 20024223 Arthur Serra 91.67 aserra1@stevens.edu
+received submission pg:Band Saw 20024223 Arthur Serra 100.0 aserra1@stevens.edu
+received submission pg:Drill Press 10462154 Thomas Roff 91.67 troff@stevens.edu
+received submission pg:Band Saw 10462154 Thomas Roff 100.0 troff@stevens.edu
+received submission pg:Laser Cutter 10462154 Thomas Roff 90.91 troff@stevens.edu
+received submission pg:Band Saw 10464071 Aashutosh Kulakarni Prachet 100.0 akulakar@stevens.edu
+received submission pg:Drill Press 10463920 Erin Wolf 100.0 ewolf1@stevens.edu
+received submission pg:Band Saw 10463920 Erin Wolf 100.0 ewolf1@stevens.edu
+received submission pg:Drill Press 20025055 Aidan Berard 91.67 aberard@stevens.edu
+received submission pg:Band Saw 20025055 Aidan Berard 90.0 aberard@stevens.edu
