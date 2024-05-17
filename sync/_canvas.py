@@ -22,7 +22,7 @@ class CanvasSync:
     _canvas: Canvas
     _course: Course
     _grit_permission_quizzes: bidict[str, int]
-    _group_tracking_quizzes: bidict[str, int]
+    _grit_add_user_quizzes: bidict[str, int]
     _quiz_id_to_group_id: dict[int, Group]
     _initialize_time = datetime.now(timezone.utc)
 
@@ -33,7 +33,7 @@ class CanvasSync:
         self._canvas = Canvas(config.api_url, config.api_key)
         self._course = self._canvas.get_course(config.course_id)
         self._grit_permission_quizzes = bidict(config.grit_permission_quizzes)
-        self._group_tracking_quizzes = bidict(config.group_tracking_quizzes)
+        self._grit_add_user_quizzes = bidict(config.grit_add_user_quizzes)
         self._quiz_id_to_group_id = {
             k: self._canvas.get_group(v) for k, v in config.quiz_id_to_group_id.items()
         }
@@ -41,7 +41,7 @@ class CanvasSync:
     def get_passing_results(self: Self, passing_score: int = 90) -> pl.DataFrame:
         submissions = self._course.get_multiple_submissions(
             assignment_ids=self._grit_permission_quizzes.values()
-            | self._group_tracking_quizzes.values(),
+            | self._grit_add_user_quizzes.values(),
             submitted_since=self._initialize_time - timedelta(days=7),
             student_ids=["all"],
         )
@@ -70,7 +70,7 @@ class CanvasSync:
             quiz_id = sub.assignment_id
             quiz_name = self._grit_permission_quizzes.inverse.get(
                 quiz_id,
-            ) or self._group_tracking_quizzes.inverse.get(
+            ) or self._grit_add_user_quizzes.inverse.get(
                 quiz_id,
             )
             user_id = sub.user_id
@@ -97,6 +97,7 @@ class CanvasSync:
                 email,
             )
 
+            # grant permissions if a permission quiz
             if quiz_id in self._grit_permission_quizzes.inverse:
                 row = pl.DataFrame(
                     {
@@ -112,7 +113,20 @@ class CanvasSync:
                 )
                 passing = passing.vstack(row)
 
-            # to be enabled once proper groups have been created
+            # user with no permissions if a group tracking quiz
+            if quiz_id in self._grit_add_user_quizzes.inverse:
+                row = pl.DataFrame(
+                    {
+                        "firstName": first_name,
+                        "lastName": last_name,
+                        "externalId": cwid,
+                        "email": email,
+                        **{q: "" for q in self._grit_add_user_quizzes},
+                    },
+                )
+                passing = passing.vstack(row)
+
+            # add to a canvas group if desired
             if (group := self._quiz_id_to_group_id.get(quiz_id)) is not None:
                 logger.debug(
                     "Adding %s %s to group %s",
