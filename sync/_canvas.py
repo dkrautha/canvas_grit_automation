@@ -53,7 +53,11 @@ class CanvasSync:
             "lastName": pl.Utf8,
             "externalId": pl.Utf8,
             "email": pl.Utf8,
-            **{quiz_name: pl.Utf8 for quiz_name in self._grit_permission_quizzes},
+            **{
+                quiz_name: pl.Utf8
+                for quiz_name in self._grit_permission_quizzes
+                | self._grit_add_user_quizzes
+            },
         }
 
         passing = pl.DataFrame(schema=schema)
@@ -99,6 +103,7 @@ class CanvasSync:
 
             # grant permissions if a permission quiz
             if quiz_id in self._grit_permission_quizzes.inverse:
+                print(self._grit_add_user_quizzes | self._grit_permission_quizzes)
                 row = pl.DataFrame(
                     {
                         "firstName": first_name,
@@ -108,6 +113,7 @@ class CanvasSync:
                         **{
                             q: "x" if q == quiz_name else ""
                             for q in self._grit_permission_quizzes
+                            | self._grit_add_user_quizzes
                         },
                     },
                 )
@@ -121,7 +127,11 @@ class CanvasSync:
                         "lastName": last_name,
                         "externalId": cwid,
                         "email": email,
-                        **{q: "" for q in self._grit_add_user_quizzes},
+                        **{
+                            q: ""
+                            for q in self._grit_permission_quizzes
+                            | self._grit_add_user_quizzes
+                        },
                     },
                 )
                 passing = passing.vstack(row)
