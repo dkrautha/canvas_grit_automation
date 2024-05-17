@@ -6,7 +6,7 @@ course_id = 12345
 [canvas.grit_permission_quizzes]
 "pg:Laser Cutter" = 440133
 
-[canvas.group_tracking_quizzes]
+[canvas.grit_add_user_quizzes]
 "3D Printers" = 440132
 
 [canvas.quiz_id_to_group_id]

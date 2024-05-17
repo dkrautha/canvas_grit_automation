@@ -13,7 +13,7 @@
     - [Finding Grit Column Names](#finding-grit-column-names)
     - [Finding Quiz Ids](#finding-quiz-ids)
     - [Putting It Together](#putting-it-together)
-  - [`[canvas.group_tracking_quizzes]`](#canvasgroup_tracking_quizzes)
+  - [`[canvas.grit_add_user_quizzes]`](#canvasgrit_add_user_quizzes)
     - [Finding Quiz Ids](#finding-quiz-ids-1)
     - [Putting It Together](#putting-it-together-1)
   - [`[canvas.quiz_id_to_group_id]`](#canvasquiz_id_to_group_id)
@@ -141,7 +141,7 @@ Using the Laser Cutter as an example again, its quiz id is 440133.
 
 You can add as many additional quizzes as you like, following the same process.
 
-## `[canvas.group_tracking_quizzes]`
+## `[canvas.grit_add_user_quizzes]`
 
 This section is a mapping between arbitrary names, and their corresponding quiz
 ids in Canvas. Sync will check for submissions from the given quiz ids, and
@@ -160,7 +160,7 @@ Using the 3D Printers as an example, its quiz id is 440132.
 ### Putting It Together
 
 ```toml
-[canvas.group_tracking_quizzes]
+[canvas.grit_add_user_quizzes]
 "3D Printers" = 440132
 ```
 
