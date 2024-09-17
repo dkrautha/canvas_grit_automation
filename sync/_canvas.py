@@ -105,7 +105,6 @@ class CanvasSync:
 
             # grant permissions if a permission quiz
             if quiz_id in self._grit_permission_quizzes.inverse:
-                print(self._grit_add_user_quizzes | self._grit_permission_quizzes)
                 row = pl.DataFrame(
                     {
                         "firstName": first_name,
