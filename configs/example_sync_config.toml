@@ -2,6 +2,7 @@
 api_url = "https://canvas.instructure.com"
 api_key = "YOUR_API_KEY"
 course_id = 12345
+lookback_time = 7
 
 [canvas.grit_permission_quizzes]
 "pg:Laser Cutter" = 440133

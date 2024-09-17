@@ -12,7 +12,7 @@ class CanvasConfig(BaseModel):
     grit_permission_quizzes: dict[str, int]
     grit_add_user_quizzes: dict[str, int]
     quiz_id_to_group_id: dict[int, int]
-
+    lookback_time: int
 
 class GritConfig(BaseModel):
     api_url: str

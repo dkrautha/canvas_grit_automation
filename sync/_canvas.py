@@ -25,7 +25,7 @@ class CanvasSync:
     _grit_add_user_quizzes: bidict[str, int]
     _quiz_id_to_group_id: dict[int, Group]
     _initialize_time = datetime.now(timezone.utc)
-
+    _lookback_time: int
     def __init__(
         self: Self,
         config: CanvasConfig,
@@ -36,13 +36,15 @@ class CanvasSync:
         self._grit_add_user_quizzes = bidict(config.grit_add_user_quizzes)
         self._quiz_id_to_group_id = {
             k: self._canvas.get_group(v) for k, v in config.quiz_id_to_group_id.items()
+        
         }
+        self._lookback_time=config.lookback_time
 
     def get_passing_results(self: Self, passing_score: int = 90) -> pl.DataFrame:
         submissions = self._course.get_multiple_submissions(
             assignment_ids=self._grit_permission_quizzes.values()
             | self._grit_add_user_quizzes.values(),
-            submitted_since=self._initialize_time - timedelta(days=7),
+            submitted_since=self._initialize_time - timedelta(days=self._lookback_time),
             student_ids=["all"],
         )
 
