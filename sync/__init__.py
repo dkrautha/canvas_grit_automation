@@ -83,7 +83,9 @@ def main() -> None:
     run()
 
     scheduler.add_job(run, "interval", minutes=30)
-    scheduler.start()
+    print("upsert")
+    logger.warning("upsert")
+
 
 
 __all__ = []
