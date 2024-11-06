@@ -60,6 +60,7 @@ def main() -> None:
 
         if upload_to_grit and len(data) > 0:
             response = grit.upsert(data)
+            logger.warning("Request to Grit returned OK")
             if not response.ok:
                 logger.warning("Request to Grit didn't return OK")
                 logger.warning(response.text)
@@ -81,7 +82,7 @@ def main() -> None:
     signal.signal(signal.SIGINT, signal_handler)
     signal.signal(signal.SIGTERM, signal_handler)
     run()
-
+    logger.warning("ran run upsert")
     scheduler.add_job(run, "interval", minutes=30)
     scheduler.start()
 
