@@ -25,7 +25,7 @@
     - [`api_key`](#api_key-1)
     - [`perform_upload`](#perform_upload)
   - [`[misc]`](#misc)
-
+  - ['[lookback_time]'](#lookback_time)
 ## Location
 
 The location of the Sync config file is in `configs/sync_config.toml`. You can
