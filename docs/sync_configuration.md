@@ -255,3 +255,9 @@ Here is where miscellaneous configuration goes. At the time of writing this
 documentation the only thing present here is where the folder for Grit backups
 should be placed. Unless you have a really good reason to change it, leave it at
 what it is in the example config file.
+
+## '[lookback_time]'
+
+Students who compeleted tests while pi was down were not receiving permissions. Fixed by adding a parameter to sync_config.toml called lookback_time to look n days back.
+
+Default value of 7 days
