@@ -23,6 +23,7 @@ class Grit:
         # string, but unsure if requests will be happy with that
         # leaving as is for now to not break anything
         csv = io.BytesIO()
+        df = df.unique(subset=["externalId"], keep="last")
         df.write_csv(csv)
 
         request = self._session.prepare_request(
