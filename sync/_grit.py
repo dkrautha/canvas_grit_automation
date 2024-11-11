@@ -19,13 +19,12 @@ class Grit:
         self._url = url
 
     def upsert(self: Self, df: pl.DataFrame) -> requests.Response:
-        # TODO(David): might be able to get away with just using df returning a
+        # TODO(David): might be able to get away with just using write_csv returning a
         # string, but unsure if requests will be happy with that
         # leaving as is for now to not break anything
         csv = io.BytesIO()
-        df = df.unique(subset=["externalId"], keep="last")
         df.write_csv(csv)
-        
+
         request = self._session.prepare_request(
             requests.Request(
                 method="POST",
