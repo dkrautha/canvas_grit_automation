@@ -14,7 +14,7 @@ packages = [{ include = "sync" }, { include = "jsonl_formatter" }]
 python = "^3.12"
 polars = "^0.20.7"
 canvasapi = "^3.2.0"
-requests = "^2.31.0"
+requests = "^2.32.4"
 Flask = "^3.0.2"
 xlsx2csv = "^0.8.2"
 apscheduler = "^3.10.4"
